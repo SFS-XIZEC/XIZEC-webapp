@@ -4,5 +4,53 @@
 
 :root {
   --primary:#FFC300;
+  --textcolor:#3D3D3D;
 }
 
+.custom-dots .slick-dots li{
+  top:60px
+}
+
+.custom-dots .slick-dots li button {
+  position: absolute;
+  inset: 0;
+  height: 6px;
+  background: black !important;
+}
+
+.custom-dots .slick-dots li.slick-active::after {
+  width: 100%;
+  display: block;
+  height: 6px;
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  background: black !important;
+  opacity: 1;
+  border-radius: 5px;
+  transition: width 3000 ease-out;
+}
+
+.custom-dots .slick-list .slick-slide{
+  display: flex;
+  justify-content: center;
+}
+
+.flag-dropdown {
+border-radius: 8px !important;
+width: 50px !important;
+padding: 6px !important;
+background-color: #ffffff !important;
+}
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+  border-radius: 8px !important;
+}
+
+.form-control {
+  padding-left: 10px !important;
+}
+
+.react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus {
+  border-radius: 8px !important;
+}

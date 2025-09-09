@@ -11,8 +11,7 @@ export default {
     extend: {
       colors: {
         primary: "var(--primary)",
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        textcolor: "var(--textcolor)",
       },
       fontFamily: {
         poppins: "var(--font-poppins)",

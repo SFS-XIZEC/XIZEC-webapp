@@ -49,7 +49,7 @@ const headingData = {
 
 export default function Header() {
   return (
-    <div className="bg-cover bg-no-repeat min-h-screen flex flex-col justify-between"
+    <div className="bg-cover bg-no-repeat flex flex-col justify-between"
       style={{
         backgroundImage: "url('/images/homebg.png')",
       }}>
