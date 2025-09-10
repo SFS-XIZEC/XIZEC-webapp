@@ -1,6 +1,8 @@
+"use client";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 import FormComponent from "../FormComponent";
+import { usePathname } from "next/navigation";
 
 interface ContactItem {
   text: string;
@@ -25,6 +27,9 @@ const FormSecton: React.FC<{ data: FormSectionProp; isModal?: boolean }> = ({
   data,
   isModal = false,
 }) => {
+  const pathname = usePathname();
+
+  if (pathname === "/contact") return null;
   return (
     <div
       className="relative bg-cover bg-no-repeat bg-center"

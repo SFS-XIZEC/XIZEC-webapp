@@ -4,7 +4,7 @@ import { Form, Input, message } from "antd";
 import ReCAPTCHA from "react-google-recaptcha";
 import CommonButton from "./CommonButton";
 import parsePhoneNumberFromString from "libphonenumber-js";
-import PhoneInput from 'react-phone-input-2';
+import PhoneInput from "react-phone-input-2";
 
 interface FormProp {
   fullName: string;
@@ -13,7 +13,7 @@ interface FormProp {
   projectDetails: string;
 }
 
-const FormComponent: React.FC<{ textColor?: string }> = ({ textColor }) => {
+const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ textColor,isContact = false }) => {
   const [form] = Form.useForm();
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
 
@@ -31,7 +31,7 @@ const FormComponent: React.FC<{ textColor?: string }> = ({ textColor }) => {
       message.error("Please complete the reCAPTCHA before submitting!");
       return;
     }
-    const data = {...values , phoneNo, countryCode}
+    const data = { ...values, phoneNo, countryCode };
 
     console.log("Form Data:", data);
     message.success("Form submitted successfully!");
@@ -47,7 +47,7 @@ const FormComponent: React.FC<{ textColor?: string }> = ({ textColor }) => {
       autoComplete="off"
       requiredMark={false}
     >
-      <div className="grid grid-cols-2 gap-3">
+      <div className={`grid ${isContact ? "grid-cols-1" :"grid-cols-2 gap-3"}`}>
         {/* Full Name */}
         <Form.Item
           name="fullName"
@@ -64,7 +64,10 @@ const FormComponent: React.FC<{ textColor?: string }> = ({ textColor }) => {
             },
           ]}
         >
-          <Input placeholder="Enter your full name" className={`!h-[56px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `} />
+          <Input
+            placeholder="Enter your full name"
+            className={`!h-[56px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
+          />
         </Form.Item>
 
         {/* Business Email */}
@@ -80,22 +83,33 @@ const FormComponent: React.FC<{ textColor?: string }> = ({ textColor }) => {
             { type: "email", message: "Please enter a valid email address!" },
           ]}
         >
-          <Input placeholder="Enter your business email" className={`!h-[56px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}/>
+          <Input
+            placeholder="Enter your business email"
+            className={`!h-[56px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
+          />
         </Form.Item>
       </div>
 
       {/* Phone Number */}
-      <Form.Item name={"phone"}>
+      <Form.Item
+        name={"phone"}
+        label={
+          <span className={`${textColor ? textColor : "text-white"}`}>
+            Mobile Number
+          </span>
+        }
+      >
         <div>
           <PhoneInput
             country={"au"}
             onChange={(value) => form.setFieldsValue({ phone: value })}
+            buttonClass="!border-[#9A9A9A]"
             inputStyle={{
               color: "black",
               width: "calc(100% - 60px)",
               height: "56px",
               borderRadius: "12px",
-              border: "1px solid #d9d9d9",
+              border: "1px solid #9A9A9A",
               fontSize: "16px",
               marginLeft: "60px",
             }}
@@ -105,7 +119,6 @@ const FormComponent: React.FC<{ textColor?: string }> = ({ textColor }) => {
           />
         </div>
       </Form.Item>
-      {/* Project Details */}
       <Form.Item
         name="projectDetails"
         label={
@@ -122,7 +135,7 @@ const FormComponent: React.FC<{ textColor?: string }> = ({ textColor }) => {
         ]}
       >
         <Input.TextArea
-        className={` border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
+          className={` border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
           rows={6}
           placeholder="Describe your project in detail"
         />

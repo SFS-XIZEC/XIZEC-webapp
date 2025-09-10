@@ -22,7 +22,7 @@ export interface CardType {
 
 const WhyChooseSection:React.FC<{whychoose:WhyChooseType}> = ({whychoose}) => {
   return (
-    <div className='flex flex-col gap-10 px-6 md:px-12 lg:px-20'>
+    <div className='flex flex-col gap-16 px-6 md:px-12 lg:px-20'>
       <SectionHeading alignCenter heading={{subtitle:whychoose?.heading?.subtitle,title:whychoose?.heading?.title}}/>
 
       <div className='grid grid-cols-3 gap-6'>

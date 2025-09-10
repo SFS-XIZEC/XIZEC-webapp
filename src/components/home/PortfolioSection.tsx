@@ -19,9 +19,14 @@ export interface PotfolieoProp {
   imagesCol2: ImageProp[];
 }
 
-const PortfolioSection: React.FC<{ data: PotfolieoProp }> = ({ data }) => {
+const PortfolioSection: React.FC<{ data: PotfolieoProp; margin?: string }> = ({
+  data,
+  margin = "120px",
+}) => {
   return (
-    <div className="mt-[120px] px-6 md:px-12 lg:px-20 flex flex-col items-center gap-[50px]">
+    <div
+      className={`mt-[${margin}] px-6 md:px-12 lg:px-20 flex flex-col items-center gap-[50px]`}
+    >
       <SectionHeading alignCenter heading={data?.heading} />
 
       <div className="w-full">
@@ -56,7 +61,10 @@ const PortfolioSection: React.FC<{ data: PotfolieoProp }> = ({ data }) => {
         </div>
       </div>
 
-      <CommonButton text={"Load More"} className="!rounded-[10px] !bg-transparent !border-[2px]"/>
+      <CommonButton
+        text={"Load More"}
+        className="!rounded-[10px] !bg-transparent !border-[2px]"
+      />
     </div>
   );
 };

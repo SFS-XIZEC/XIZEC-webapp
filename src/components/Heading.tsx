@@ -23,15 +23,12 @@ export type HeadingTypes = {
   text2?: string;
   text3?: string;
 };
-const Heading: React.FC<HeadingProp> = ({
-  headingData,
-  titleWhite,
-  alingCenter,
-}) => {
+const Heading: React.FC<HeadingProp> = ({ headingData, alingCenter }) => {
   return (
     <div
-      className={`w-[63%] flex flex-col justify-center  text-white gap-[36px] mt-[120px] ${headingData?.alingCenter || alingCenter ? "items-center" : "items-start"
-        }`}
+      className={`w-[63%] flex flex-col justify-center  text-white gap-[36px] mt-[120px] ${
+        headingData?.alingCenter || alingCenter ? "items-center" : "items-start"
+      }`}
     >
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-center gap-1">
@@ -47,24 +44,24 @@ const Heading: React.FC<HeadingProp> = ({
         </div>
 
         <h1
-          className={`font-bold md:text-[60px] text-[20px] leading-6 md:leading-[120%] ${headingData?.alingCenter || alingCenter ? "text-center" : ""
-            } text-white`}
+          className={`font-bold md:text-[60px] text-[20px] leading-6 md:leading-[120%] ${
+            headingData?.alingCenter || alingCenter ? "text-center" : ""
+          } text-white`}
         >
           {headingData?.title}
         </h1>
         {headingData?.text && (
           <h1
-            className={`leading-[150%] text-[14px] ${headingData?.alingCenter || alingCenter
-              ? "text-center"
-              : "text-justify"
-              }  `}
+            className={`leading-[150%] text-[14px] ${
+              headingData?.alingCenter || alingCenter
+                ? "text-center"
+                : "text-justify"
+            }  `}
           >
             {headingData?.text}
           </h1>
         )}
       </div>
-
-      <CommonButton text={"Get Started"} />
     </div>
   );
 };

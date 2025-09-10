@@ -59,7 +59,7 @@ const ClientSection: React.FC<{ data: ClientProp[]; isCarousel?: boolean }> = ({
       ))}
     </Carousel>
   ) : (
-    <div className="grid grid-cols-4 ">
+    <div className="grid grid-cols-4 gap-8">
       {data?.map((image, index) => (
         <div
           key={index}

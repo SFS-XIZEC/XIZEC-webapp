@@ -30,11 +30,10 @@ export interface ServiceSectionType {
   };
 }
 
-interface Props {
+const ServiceSection: React.FC<{
   data: ServiceSectionType;
-}
-
-const ServiceSection: React.FC<Props> = ({ data }) => {
+  bgWhite?: boolean;
+}> = ({ data, bgWhite = false }) => {
   const cardRef = useRef<HTMLImageElement>(null);
   const [isMount, setIsMount] = useState(false);
   const [cardWidth, setcardWidth] = useState(0);
@@ -49,9 +48,13 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
     }
   }, [isMount]);
   return (
-    <section className="relative bg-black text-white pt-20 pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]">
+    <section
+      className={`relative ${
+        bgWhite ? "bg-white text-black" : "bg-black text-white pt-20 pb-[180px]"
+      } px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
+    >
       <div className="w-[70%] mx-auto">
-        <SectionHeading invert alignCenter heading={data.heading} />
+        <SectionHeading invert={!bgWhite} alignCenter heading={data.heading} />
       </div>
 
       <div ref={cardRef} className="grid grid-cols-2 items-center gap-12">
@@ -61,7 +64,9 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
               key={index}
               className={`group flex gap-[10px] items-start  p-6 ${
                 index < data.services.length - 1 && "border-b-[1px]"
-              } border-[#6B6B6B] hover:rounded-lg transition-all duration-300 text-white hover:bg-yellow-400 hover:text-black cursor-pointer`}
+              } border-[#6B6B6B] hover:rounded-lg transition-all duration-300 ${
+                bgWhite ? "text-black" : "text-white"
+              } hover:bg-yellow-400 hover:text-black cursor-pointer`}
             >
               {/* Icon */}
               <div className=" w-12 h-12 text-black bg-primary group-hover:bg-black group-hover:text-primary rounded-md flex items-center justify-center">
@@ -85,19 +90,21 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
           />
         </div>
       </div>
-      <div
-        style={{ width: cardWidth }}
-        className="absolute -bottom-[100px] bg-yellow-400 text-black rounded-[24px] p-8 flex flex-col gap-6 items-center shadow-xl"
-      >
-        <div className="flex flex-col text-center">
-          <h3 className="text-[56px] font-bold">{data.cta.title}</h3>
-          <p className="text-[20px]">{data.cta.subtitle}</p>
+      {!bgWhite && (
+        <div
+          style={{ width: cardWidth }}
+          className="absolute -bottom-[100px] bg-yellow-400 text-black rounded-[24px] p-8 flex flex-col gap-6 items-center shadow-xl"
+        >
+          <div className="flex flex-col text-center">
+            <h3 className="text-[56px] font-bold">{data.cta.title}</h3>
+            <p className="text-[20px]">{data.cta.subtitle}</p>
+          </div>
+          <CommonButton
+            text={"GET IN TOUCH"}
+            className="!border-[2px] !rounded-[10px] "
+          />
         </div>
-        <CommonButton
-          text={"GET IN TOUCH"}
-          className="!border-[2px] !rounded-[10px] "
-        />
-      </div>
+      )}
     </section>
   );
 };

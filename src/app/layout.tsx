@@ -3,9 +3,18 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/global/Footer";
 import Header from "@/components/global/Header";
-import { FacebookIcon, InstagramIcon, LinkdinIcon, LocationIcon, MailBoxIcon, PhoneIcon, TwitterIcon } from "@/common/icons";
-import 'react-phone-input-2/lib/style.css';
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkdinIcon,
+  LocationIcon,
+  MailBoxIcon,
+  PhoneIcon,
+  TwitterIcon,
+} from "@/common/icons";
+import "react-phone-input-2/lib/style.css";
 import FormSecton from "@/components/global/FormSection";
+import { headers } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,57 +58,65 @@ const footerData = {
   col3: [
     {
       text: "2972 Westheimer Rd. Santa Ana, Illinois 85486",
-      icon: <LocationIcon/>,
+      icon: <LocationIcon />,
       type: "location",
     },
     {
       text: "sara.cruz@example.com",
-      icon:  <MailBoxIcon/>,
+      icon: <MailBoxIcon />,
       type: "email",
     },
     {
       text: "(239) 555-0108",
-      icon:  <PhoneIcon/>,
+      icon: <PhoneIcon />,
       type: "phone",
     },
   ],
   socialLinks: [
-    { href: "https://facebook.com", icon:  <FacebookIcon/>, isExternal: true },
-    { href: "https://instagram.com", icon:  <InstagramIcon/>, isExternal: true },
-    { href: "https://linkedin.com", icon:  <LinkdinIcon/>, isExternal: true },
-    { href: "https://twitter.com", icon:  <TwitterIcon/>, isExternal: true },
+    { href: "https://facebook.com", icon: <FacebookIcon />, isExternal: true },
+    {
+      href: "https://instagram.com",
+      icon: <InstagramIcon />,
+      isExternal: true,
+    },
+    { href: "https://linkedin.com", icon: <LinkdinIcon />, isExternal: true },
+    { href: "https://twitter.com", icon: <TwitterIcon />, isExternal: true },
   ],
   copyrightText: "Copyright ©2025 XIZEC",
 };
 
-
 const formData = {
-  title:"Let’s Build Your Next Big IT Success",
-  subtitle:"At XIZEC, we turn ideas into impactful solutions with expert IT consulting, digital transformation, and future-ready strategies. Share your vision with us—we’ll make it happen.",
+  title: "Let’s Build Your Next Big IT Success",
+  subtitle:
+    "At XIZEC, we turn ideas into impactful solutions with expert IT consulting, digital transformation, and future-ready strategies. Share your vision with us—we’ll make it happen.",
   cols3: [
     {
       text: "2972 Westheimer Rd. Santa Ana, Illinois 85486",
-      icon: <LocationIcon/>,
+      icon: <LocationIcon />,
       type: "location",
     },
     {
       text: "sara.cruz@example.com",
-      icon:  <MailBoxIcon/>,
+      icon: <MailBoxIcon />,
       type: "email",
     },
     {
       text: "(239) 555-0108",
-      icon:  <PhoneIcon/>,
+      icon: <PhoneIcon />,
       type: "phone",
     },
   ],
   socialLinks: [
-    { href: "https://facebook.com", icon:  <FacebookIcon/>, isExternal: true },
-    { href: "https://instagram.com", icon:  <InstagramIcon/>, isExternal: true },
-    { href: "https://linkedin.com", icon:  <LinkdinIcon/>, isExternal: true },
-    { href: "https://twitter.com", icon:  <TwitterIcon/>, isExternal: true },
+    { href: "https://facebook.com", icon: <FacebookIcon />, isExternal: true },
+    {
+      href: "https://instagram.com",
+      icon: <InstagramIcon />,
+      isExternal: true,
+    },
+    { href: "https://linkedin.com", icon: <LinkdinIcon />, isExternal: true },
+    { href: "https://twitter.com", icon: <TwitterIcon />, isExternal: true },
   ],
-}
+};
 
 export default async function RootLayout({
   children,
@@ -111,10 +128,10 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
+        <Header />
         {children}
-        <FormSecton data={formData}/>
-        <Footer {...footerData}/>
+        <FormSecton data={formData} />
+        <Footer {...footerData} />
       </body>
     </html>
   );
