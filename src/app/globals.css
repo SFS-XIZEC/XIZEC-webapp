@@ -5,6 +5,17 @@
 :root {
   --primary:#FFC300;
   --textcolor:#3D3D3D;
+   font-family: "Work Sans", sans-serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: 0px !important; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  scrollbar-width: 0px !important; /* Firefox */
+  display: none;
+   /* Chrome, Safari, Opera */
 }
 
 .custom-dots .slick-dots li{
@@ -69,4 +80,9 @@ background-color: #ffffff !important;
 
 .custom-timeline .ant-timeline.ant-timeline-alternate .ant-timeline-item-right .ant-timeline-item-content{
   inset-inline-end: 30px !important;
+}
+
+.custom-modal .custom-modal-content {
+  padding: 0 !important;
+  border-radius: 12px !important;
 }

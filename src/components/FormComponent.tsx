@@ -13,7 +13,11 @@ interface FormProp {
   projectDetails: string;
 }
 
-const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ textColor,isContact = false }) => {
+const FormComponent: React.FC<{
+  textColor?: string;
+  isContact?: boolean;
+  isModal?: boolean;
+}> = ({ textColor, isContact = false, isModal = false }) => {
   const [form] = Form.useForm();
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
 
@@ -47,12 +51,18 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
       autoComplete="off"
       requiredMark={false}
     >
-      <div className={`grid ${isContact ? "grid-cols-1" :"grid-cols-2 gap-3"}`}>
+      <div
+        className={`grid ${isContact ? "grid-cols-1" : "lg:grid-cols-2 lg:gap-3"}`}
+      >
         {/* Full Name */}
         <Form.Item
           name="fullName"
           label={
-            <span className={`${textColor ? textColor : "text-white"}`}>
+            <span
+              className={`${
+                isModal ? "text-black" : textColor || "text-white"
+              }`}
+            >
               Full Name
             </span>
           }
@@ -66,7 +76,7 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
         >
           <Input
             placeholder="Enter your full name"
-            className={`!h-[56px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
+            className={`!h-[54px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
           />
         </Form.Item>
 
@@ -74,7 +84,11 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
         <Form.Item
           name="email"
           label={
-            <span className={`${textColor ? textColor : "text-white"}`}>
+            <span
+              className={`${
+                isModal ? "text-black" : textColor || "text-white"
+              }`}
+            >
               Buisness Email
             </span>
           }
@@ -85,16 +99,17 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
         >
           <Input
             placeholder="Enter your business email"
-            className={`!h-[56px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
+            className={`!h-[54px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
           />
         </Form.Item>
       </div>
 
-      {/* Phone Number */}
       <Form.Item
         name={"phone"}
         label={
-          <span className={`${textColor ? textColor : "text-white"}`}>
+          <span
+            className={`${isModal ? "text-black" : textColor || "text-white"}`}
+          >
             Mobile Number
           </span>
         }
@@ -107,7 +122,7 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
             inputStyle={{
               color: "black",
               width: "calc(100% - 60px)",
-              height: "56px",
+              height: "54px",
               borderRadius: "12px",
               border: "1px solid #9A9A9A",
               fontSize: "16px",
@@ -122,7 +137,9 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
       <Form.Item
         name="projectDetails"
         label={
-          <span className={`${textColor ? textColor : "text-white"}`}>
+          <span
+            className={`${isModal ? "text-black" : textColor || "text-white"}`}
+          >
             Project Details
           </span>
         }
@@ -136,7 +153,7 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
       >
         <Input.TextArea
           className={` border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
-          rows={6}
+          rows={isModal ? 4 : 6}
           placeholder="Describe your project in detail"
         />
       </Form.Item>
@@ -146,8 +163,11 @@ const FormComponent: React.FC<{ textColor?: string,isContact?:boolean }> = ({ te
         onChange={(value) => setCaptchaValue(value)}
       />
 
-      <Form.Item>
-        <CommonButton text="Submit" className="w-full mt-3" />
+      <Form.Item className="!mb-0">
+        <CommonButton
+          text="Submit"
+          className={`w-full mt-6 ${isModal && "!bg-black !text-white"}`}
+        />
       </Form.Item>
     </Form>
   );

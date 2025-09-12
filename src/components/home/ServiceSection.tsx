@@ -1,39 +1,16 @@
 "use client";
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SectionHeading from "../SectionHeading";
-import CommonButton from "../CommonButton";
-
-export interface ServiceCard {
-  icon: ReactNode;
-  title: string;
-  description: string;
-}
-
-export interface ServiceSectionType {
-  heading: {
-    title: string;
-    subtitle: string;
-    description: string;
-  };
-  services: ServiceCard[];
-  image: {
-    name: string;
-    alternativeText: string;
-    url: string;
-  };
-  cta: {
-    title: string;
-    subtitle: string;
-    buttonText: string;
-    buttonLink: string;
-  };
-}
+import HireCard from "../HireCard";
+import { ServicesComponent } from "@/types";
+import MaskedIcon from "../MaskedIcon";
+import { StrapiImage } from "../StrapiImage";
 
 const ServiceSection: React.FC<{
-  data: ServiceSectionType;
+  ServiceData: ServicesComponent;
   bgWhite?: boolean;
-}> = ({ data, bgWhite = false }) => {
+}> = ({ ServiceData, bgWhite = false }) => {
   const cardRef = useRef<HTMLImageElement>(null);
   const [isMount, setIsMount] = useState(false);
   const [cardWidth, setcardWidth] = useState(0);
@@ -53,24 +30,33 @@ const ServiceSection: React.FC<{
         bgWhite ? "bg-white text-black" : "bg-black text-white pt-20 pb-[180px]"
       } px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
     >
-      <div className="w-[70%] mx-auto">
-        <SectionHeading invert={!bgWhite} alignCenter heading={data.heading} />
+      <div className="lg:w-[70%] mx-auto">
+        <SectionHeading
+          invert={!bgWhite}
+          alignCenter
+          heading={ServiceData?.heading}
+        />
       </div>
 
-      <div ref={cardRef} className="grid grid-cols-2 items-center gap-12">
-        <div className="flex flex-col gap-">
-          {data.services.map((service, index) => (
+      <div ref={cardRef} className="grid lg:grid-cols-2 lg:items-center gap-12">
+        <div className="flex flex-col">
+          {ServiceData?.cards.map((service, index) => (
             <div
               key={index}
               className={`group flex gap-[10px] items-start  p-6 ${
-                index < data.services.length - 1 && "border-b-[1px]"
+                index < ServiceData?.cards.length - 1 && "border-b-[1px]"
               } border-[#6B6B6B] hover:rounded-lg transition-all duration-300 ${
                 bgWhite ? "text-black" : "text-white"
               } hover:bg-yellow-400 hover:text-black cursor-pointer`}
             >
-              {/* Icon */}
-              <div className=" w-12 h-12 text-black bg-primary group-hover:bg-black group-hover:text-primary rounded-md flex items-center justify-center">
-                {service?.icon}
+              <div className="p-1 text-black bg-primary group-hover:bg-black group-hover:text-primary rounded-md flex items-center justify-center">
+                <MaskedIcon
+                  src={service?.image?.url}
+                  color="bg-black"
+                  groupHoverColor="group-hover:text-primary"
+                  hoverColor="group-hover:text-primary"
+                  size={24}
+                />
               </div>
 
               <div className="flex items-start flex-col gap-3">
@@ -81,29 +67,22 @@ const ServiceSection: React.FC<{
           ))}
         </div>
 
-        <div className="rounded-lg overflow-hidden">
-          <Image
-            src={data.image.url}
-            alt={data.image.alternativeText}
+        <div className="rounded-lg overflow-hidden ">
+          <StrapiImage
+            src={ServiceData?.image.url}
+            alt={ServiceData?.image.name}
             width={500}
             height={800}
+            className="!w-full"
           />
         </div>
       </div>
       {!bgWhite && (
-        <div
-          style={{ width: cardWidth }}
-          className="absolute -bottom-[100px] bg-yellow-400 text-black rounded-[24px] p-8 flex flex-col gap-6 items-center shadow-xl"
-        >
-          <div className="flex flex-col text-center">
-            <h3 className="text-[56px] font-bold">{data.cta.title}</h3>
-            <p className="text-[20px]">{data.cta.subtitle}</p>
-          </div>
-          <CommonButton
-            text={"GET IN TOUCH"}
-            className="!border-[2px] !rounded-[10px] "
-          />
-        </div>
+        <HireCard
+          className="absolute -bottom-[120px] lg:-bottom-[100px]"
+          cardWidth={cardWidth}
+          data={ServiceData?.HireCard}
+        />
       )}
     </section>
   );

@@ -1,3 +1,5 @@
+import { Block } from "@/types";
+
 export function flattenAttributes(data: any): any {
   // Check if data is a plain object; return as is if not
   if (
@@ -47,4 +49,13 @@ export function getStrapiMedia(url: string | null) {
   if (url.startsWith("data:")) return url;
   if (url.startsWith("http") || url.startsWith("//")) return url;
   return `${getStrapiURL()}${url}`;
+}
+
+export function getBlock<T extends Block>(
+  blocks: Block[],
+  component: T["__component"]
+): T | undefined {
+  return blocks.find(
+    (block): block is T => block.__component === component
+  );
 }

@@ -30,10 +30,10 @@ const OurFocusSection: React.FC<OurFocusProps> = ({
   return (
     <div
       className={`mx-auto ${
-        rowReverse && "flex-row-reverse"
-      } flex gap-12 items-center bg-white px-6 md:px-12 lg:px-20`}
+        rowReverse && "lg:flex-row-reverse flex-col-reverse"
+      } flex flex-col lg:flex-row gap-6 lg:gap-12 items-center bg-white px-6 md:px-12 lg:px-20`}
     >
-      <div className="w-[50%] flex gap-5 justify-center lg:justify-start">
+      <div className="lg:w-[50%] flex gap-5 justify-center lg:justify-start">
         <Image
           src={images.url}
           alt={images.name}
@@ -43,7 +43,7 @@ const OurFocusSection: React.FC<OurFocusProps> = ({
         />
       </div>
 
-      <div className="w-[50%] flex flex-col gap-6 items-start justify-between">
+      <div className="lg:w-[50%] flex flex-col gap-6 items-start justify-between">
         <SectionHeading heading={{ subtitle: subtitle, title: title }} />
 
         <div

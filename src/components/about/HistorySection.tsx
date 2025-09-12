@@ -45,7 +45,7 @@ const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
     <div
       className={`relative bg-black text-white pt-20 pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
     >
-      <div className="w-[70%] mx-auto">
+      <div className="lg:w-[70%] mx-auto">
         <SectionHeading invert alignCenter heading={data.heading} />
       </div>
 
@@ -54,6 +54,7 @@ const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
         className="bg-black py-12 px-4 md:px-20 custom-timeline"
       >
         <Timeline
+          className="hidden lg:block"
           mode="alternate"
           items={data?.timelineData.map((item, index) => ({
             dot: <div className="w-8 h-8 bg-primary rounded-full"></div>,
@@ -80,6 +81,25 @@ const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
             ),
           }))}
         />
+
+        <div className="flex flex-col">
+          {data?.timelineData.map((item, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <div className="relative bg-[#2D2D2D] p-4 rounded-[12px] text-start gap-2">
+                <h3 className="text-white text-lg font-bold">{item.year}</h3>
+                <div>
+                  <h4 className="text-white text-md font-semibold">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-300 text-sm">{item.description}</p>
+                </div>
+              </div>
+              {index < data?.timelineData?.length-1 && (
+                <div className="w-1 border-dashed h-20 border-l-2 border-[#6B6B6B]"></div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
       <HireCard

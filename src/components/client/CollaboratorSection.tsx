@@ -22,7 +22,7 @@ const CollaboratorSection: React.FC<{ data: CollaboratorData }> = ({
 }) => {
   return (
     <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
-      <div className="w-[70%] mx-auto flex text-center">
+      <div className="lg:w-[70%] mx-auto flex text-center">
         <SectionHeading heading={data?.heading} alignCenter />
       </div>
       <ClientSection data={data?.client} />

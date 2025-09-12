@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SectionHeading from "../SectionHeading";
 import CommonButton from "../CommonButton";
+import HireCard from "../HireCard";
 
 export interface MissionSectionType {
   heading: {
@@ -48,7 +49,7 @@ const MissionSection: React.FC<Props> = ({ data }) => {
     <section className="relative bg-black mt-[80px] mb-[100px] text-white pt-20 pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]">
       <div
         ref={cardRef}
-        className="grid grid-cols-2 items-center gap-12 h-full"
+        className="grid lg:grid-cols-2 items-center gap-12 h-full"
       >
         <div className="flex flex-col justify-between">
           <SectionHeading invert heading={data.heading} />
@@ -70,19 +71,12 @@ const MissionSection: React.FC<Props> = ({ data }) => {
           />
         </div>
       </div>
-      <div
-        style={{ width: cardWidth }}
-        className="absolute -bottom-[100px] bg-yellow-400 text-black rounded-[24px] p-8 flex flex-col gap-6 items-center shadow-xl"
-      >
-        <div className="flex flex-col text-center">
-          <h3 className="text-[56px] font-bold">{data.cta.title}</h3>
-          <p className="text-[20px]">{data.cta.subtitle}</p>
-        </div>
-        <CommonButton
-          text={"GET IN TOUCH"}
-          className="!border-[2px] !rounded-[10px] "
-        />
-      </div>
+
+      <HireCard
+        className="absolute -bottom-[100px]"
+        cardWidth={cardWidth}
+        data={data?.cta}
+      />
     </section>
   );
 };

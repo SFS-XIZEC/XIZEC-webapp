@@ -1,33 +1,19 @@
 import { StarIcon } from "@/common/icons";
 import React from "react";
-import CommonButton from "./CommonButton";
+import { HeroSection } from "@/types";
 
 export type HeadingProp = {
-  headingData?: HeadingTypes;
+  headingData?: HeroSection | null;
   titleWhite?: boolean;
   alingCenter?: boolean;
   type?: string;
 };
 
-export type HeadingTypes = {
-  id?: number;
-  documentId?: string;
-  head?: string;
-  title?: string;
-  type?: string;
-  text?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  publishedAt?: string;
-  alingCenter?: boolean;
-  text2?: string;
-  text3?: string;
-};
 const Heading: React.FC<HeadingProp> = ({ headingData, alingCenter }) => {
   return (
     <div
-      className={`w-[63%] flex flex-col justify-center  text-white gap-[36px] mt-[120px] ${
-        headingData?.alingCenter || alingCenter ? "items-center" : "items-start"
+      className={`w-[90%] lg:w-[63%] flex flex-col justify-center  text-white gap-[36px] ${
+        alingCenter ? "items-center" : "items-start"
       }`}
     >
       <div className="flex flex-col gap-4">
@@ -35,7 +21,7 @@ const Heading: React.FC<HeadingProp> = ({ headingData, alingCenter }) => {
           <StarIcon />
 
           <div className="text-primary text-center font-semibold text-[18px]">
-            {headingData?.head}
+            {headingData?.title}
           </div>
 
           <div>
@@ -44,21 +30,19 @@ const Heading: React.FC<HeadingProp> = ({ headingData, alingCenter }) => {
         </div>
 
         <h1
-          className={`font-bold md:text-[60px] text-[20px] leading-6 md:leading-[120%] ${
-            headingData?.alingCenter || alingCenter ? "text-center" : ""
+          className={`font-bold md:text-[60px] text-[25px] leading-8 md:leading-[120%] ${
+            alingCenter ? "text-center" : ""
           } text-white`}
         >
-          {headingData?.title}
+          {headingData?.subtitle}
         </h1>
-        {headingData?.text && (
+        {headingData?.description && (
           <h1
             className={`leading-[150%] text-[14px] ${
-              headingData?.alingCenter || alingCenter
-                ? "text-center"
-                : "text-justify"
+              alingCenter ? "text-center" : "text-justify"
             }  `}
           >
-            {headingData?.text}
+            {headingData?.description}
           </h1>
         )}
       </div>

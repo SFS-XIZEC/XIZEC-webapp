@@ -82,7 +82,7 @@ const ContactCollaborator: React.FC<{ data: CollaboratorData }> = ({
   };
   return (
     <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
-      <div className="w-[70%] mx-auto flex text-center">
+      <div className="lg:w-[70%] mx-auto flex text-center">
         <SectionHeading heading={data?.heading} alignCenter />
       </div>
       <div className="flex flex-col gap-8">
@@ -91,7 +91,7 @@ const ContactCollaborator: React.FC<{ data: CollaboratorData }> = ({
             <div key={index} className="flex justify-center">
               <div
                 key={index}
-                className="mr-8 flex justify-center px-[40px] py-[20px] rounded-[20px] border-[2px] border-[#EAEAEA]"
+                className="mr-8 flex justify-center px-[40px] py-[20px] rounded-[20px] border-[1px] border-[#EAEAEA]"
               >
                 <Image
                   src={item?.url}

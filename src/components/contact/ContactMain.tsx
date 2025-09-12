@@ -39,32 +39,48 @@ const ContactMain: React.FC<{ data: contactProp }> = ({ data }) => {
     swipeToSlide: true,
     autoplaySpeed: 3000,
     afterChange: (current: number) => setCurrentSlide(current),
+    responsive: [
+      {
+        breakpoint: 1230,
+        settings: {
+          slidesToShow: 2,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "0px",
+        },
+      },
+    ],
   };
   return (
-    <div className="mx-auto flex gap-6 max-w-[1200px]">
-      <div className="w-[70%] p-8 rounded-3xl bg-[#F4F2EA] shadow-md">
-        <p className="text-[56px] font-[500] mb-3 leading-[120%]">
+    <div className="flex flex-col lg:flex-row gap-6 w-full px-6 md:px-12 lg:px-20">
+      <div className="lg:w-[70%] p-4 lg:p-8 rounded-3xl bg-[#F4F2EA] shadow-md">
+        <p className="text-[32px] lg:text-[56px] font-[500] mb-3 leading-[120%]">
           {data?.title}
         </p>
         <p className="text-black mb-6">{data?.description}</p>
 
-        <div className="relative w-full bg-white p-6 rounded-[15px]">
+        <div className="relative w-full bg-white p-6 rounded-[15px] custom-dots">
           <button
-            className="cursor-pointer absolute top-1/2 left-2 w-8 h-8 flex items-center justify-center text-white bg-black rounded-full"
+            className="hidden lg:flex cursor-pointer absolute top-1/2 left-2 w-8 h-8 items-center justify-center text-white bg-black rounded-full"
             onClick={() => carouselRef.current?.prev()}
           >
             <LeftOutlined />
           </button>
           <button
-            className="cursor-pointer absolute right-2 top-1/2 w-8 h-8 flex items-center justify-center text-white bg-black rounded-full"
+            className="cursor-pointer absolute right-2 top-1/2 w-8 h-8 hidden lg:flex items-center justify-center text-white bg-black rounded-full"
             onClick={() => carouselRef.current?.next()}
           >
             <RightOutlined />
           </button>
-          <Carousel ref={carouselRef} {...settings} className="!px-10">
+          <Carousel ref={carouselRef} {...settings} className="lg:!px-10">
             {data?.reviews.map((testimonial: any, index: number) => (
               <div key={index} className="flex justify-center">
-                <div className="bg-[#F4F2EA] mr-5 p-5 rounded-[15px] flex flex-col justify-between gap-4 min-h-[420px] max-w-[350px] shadow">
+                <div className="bg-[#F4F2EA] mr-2 lg:mr-5 p-2 lg:p-5 rounded-[15px] flex flex-col justify-between gap-4 min-h-[420px] max-w-[350px] shadow">
                   <div className="flex flex-col items-start gap-3">
                     <div className="flex items-center gap-2">
                       <Rate defaultValue={testimonial.rating} disabled />
@@ -101,7 +117,7 @@ const ContactMain: React.FC<{ data: contactProp }> = ({ data }) => {
         </div>
       </div>
 
-      <div className="w-[30%] p-8 rounded-3xl shadow-[0px_4px_26.8px_0px_#0000001A]">
+      <div className="lg:w-[30%] p-8 rounded-3xl shadow-[0px_4px_26.8px_0px_#0000001A]">
         <FormComponent textColor="text-black" isContact />
       </div>
     </div>

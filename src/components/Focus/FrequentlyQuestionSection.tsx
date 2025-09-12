@@ -36,7 +36,7 @@ const FrequentlyQuestionSection: React.FC<{ data: FAQSectionProps }> = ({
       <SectionHeading heading={data?.heading} alignCenter />
 
       <div className="relative">
-        <div className="w-[80%] mx-auto flex flex-col gap-6 z-50">
+        <div className="lg:w-[80%] mx-auto flex flex-col gap-6 z-50">
         {data?.faqs.map((faq, index) => (
           <div
             key={index}
@@ -62,7 +62,7 @@ const FrequentlyQuestionSection: React.FC<{ data: FAQSectionProps }> = ({
           </div>
         ))}
         </div>
-        <div className="absolute bottom-0 left-0">
+        <div className="hidden lg:block absolute bottom-0 left-0">
           <Image
             src={data.image.url}
             alt={data.image.alternativeText}
@@ -70,7 +70,7 @@ const FrequentlyQuestionSection: React.FC<{ data: FAQSectionProps }> = ({
             height={400}
           />
         </div>
-        <div className="absolute top-0 right-0">
+        <div className="hidden lg:block absolute top-0 right-0">
           <Image
             src={data.image.url}
             alt={data.image.alternativeText}

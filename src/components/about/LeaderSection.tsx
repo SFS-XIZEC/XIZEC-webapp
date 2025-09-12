@@ -21,7 +21,7 @@ export type LeaderData = {
 };
 const LeaderSection: React.FC<{ data: LeaderData }> = ({ data }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-[98px] px-6 md:px-12 lg:px-20 mt-[80px]">
+    <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-[98px] px-6 md:px-12 lg:px-20 mt-[80px]">
       <div className="flex flex-col gap-8 items-start ">
         <SectionHeading heading={data?.heading} />
 

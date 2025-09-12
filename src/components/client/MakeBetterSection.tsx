@@ -50,7 +50,7 @@ const MakeBetterSection: React.FC<{
       className={`relative bg-black text-white pt-20 pb-[180px]
       px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
     >
-      <div ref={cardRef} className="grid grid-cols-2 items-center gap-12">
+      <div ref={cardRef} className="grid lg:grid-cols-2 items-center gap-12">
         <div className="rounded-lg overflow-hidden">
           <Image
             src={data.image.url}

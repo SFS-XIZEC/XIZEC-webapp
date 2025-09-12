@@ -1,71 +1,40 @@
-import Image from "next/image";
+import { Contact, FooterProp, SocialLink } from "@/types";
 import Link from "next/link";
-import { ReactNode } from "react";
-
-interface ImageData {
-  url: string;
-  alt: string;
-  name: string;
-}
-
-interface LinkItem {
-  href: string;
-  text: string;
-  isExternal?: boolean;
-}
-
-interface ColumnData {
-  title: string;
-  links: LinkItem[];
-}
-
-interface ContactItem {
-  text: string;
-  icon: ReactNode; 
-  type: string;
-}
-
-interface SocialLink {
-  href: string;
-  icon: ReactNode;
-  isExternal?: boolean;
-}
+import MaskedIcon from "../MaskedIcon";
+import { StrapiImage } from "../StrapiImage";
 
 interface FooterProps {
-  logo: ImageData;
-  col1: ColumnData;
-  col2: ColumnData;
-  col3: ContactItem[];
-  socialLinks: SocialLink[];
-  copyrightText: string;
+  ContactData: Contact[];
+  FooterData: FooterProp;
+  SocialLinks: SocialLink[];
 }
 
 const Footer: React.FC<FooterProps> = ({
-  logo,
-  col1,
-  col2,
-  col3,
-  socialLinks,
-  copyrightText,
+  ContactData,
+  FooterData,
+  SocialLinks,
 }) => {
   return (
-    <footer className="bg-black text-gray-300 py-10 px-6 md:px-16">
-      <div className="mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-
+    <footer className="bg-black text-gray-300 py-10 px-6 md:px-16 font-sans">
+      <div className="mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="flex flex-col items-start">
-          <Image
-            src={logo.url}
-            alt={logo.alt}
-            width={250}
-            height={85}
-            className="mb-4"
-          />
+          <Link href={FooterData?.MainLogo?.href ?? "#"}>
+            <StrapiImage
+              src={FooterData?.MainLogo?.image?.url}
+              alt={FooterData?.MainLogo?.image?.name}
+              width={250}
+              height={85}
+              className="mb-4"
+            />
+          </Link>
         </div>
 
         <div>
-          <h3 className="text-white font-semibold mb-3">{col1.title}</h3>
+          <h3 className="text-white font-semibold mb-3">
+            {FooterData?.Column1?.title}
+          </h3>
           <ul className="space-y-2">
-            {col1.links.map((link, idx) => (
+            {FooterData?.Column1?.links.map((link, idx) => (
               <li key={idx}>
                 <Link
                   href={link.href}
@@ -82,9 +51,11 @@ const Footer: React.FC<FooterProps> = ({
 
         {/* Links / Col 2 */}
         <div>
-          <h3 className="text-white font-semibold mb-3">{col2.title}</h3>
+          <h3 className="text-white font-semibold mb-3">
+            {FooterData?.Column1?.title}
+          </h3>
           <ul className="space-y-2">
-            {col2.links.map((link, idx) => (
+            {FooterData?.Column1?.links.map((link, idx) => (
               <li key={idx}>
                 <Link
                   href={link.href}
@@ -103,39 +74,56 @@ const Footer: React.FC<FooterProps> = ({
         <div>
           <h3 className="text-white font-semibold mb-3">Contact</h3>
           <ul className="space-y-3">
-            {col3.map((item, idx) => (
-              <li key={idx} className="flex items-center gap-3">
-                {item.icon}
-                {item.type === "email" ? (
-                  <Link href={`mailto:${item.text}`} className="hover:text-yellow-400">
-                    {item.text}
-                  </Link>
-                ) : item.type === "phone" ? (
-                  <Link href={`tel:${item.text}`} className="hover:text-yellow-400">
-                    {item.text}
-                  </Link>
-                ) : (
-                  <span>{item.text}</span>
-                )}
-              </li>
-            ))}
+            {ContactData?.map((item) => {
+              const { id, value, image, type } = item;
+
+              let linkHref = "#";
+              if (type === "email") linkHref = `mailto:${value}`;
+              if (type === "phone") {
+                const phoneNumber = value.replace(/\D/g, "");
+                linkHref = `tel:${phoneNumber}`;
+              }
+              if (type === "location")
+                linkHref = `https://www.google.com/maps/search/?api=1&query=${value}`;
+              return (
+                <Link
+                  href={linkHref}
+                  key={id}
+                  target={type === "location" ? "_blank" : undefined}
+                  className="flex gap-1 group lg:gap-2 items-center  transition-colors hover:text-primary"
+                >
+                  <MaskedIcon
+                    src={image?.url ?? "#"}
+                    size={28}
+                    color="bg-white"
+                    hoverColor="hover:bg-primary"
+                    groupHoverColor="group-hover:bg-primary"
+                  />
+                  <p className="text-[16px]">{value}</p>
+                </Link>
+              );
+            })}
           </ul>
         </div>
       </div>
 
       {/* Divider */}
       <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm">{copyrightText}</p>
+        <p className="text-sm">{FooterData?.Copyright}</p>
         <div className="flex gap-4 mt-4 md:mt-0">
-          {socialLinks.map((social, idx) => (
+          {SocialLinks?.map((social, idx) => (
             <Link
               key={idx}
               href={social.href}
-              target={social.isExternal ? "_blank" : "_self"}
-              rel={social.isExternal ? "noopener noreferrer" : ""}
-              className="bg-gray-800 text-white hover:text-black rounded-full hover:bg-yellow-400 transition"
+              target={"_blank"}
+              className="bg-gray-800 group p-2 text-white hover:text-black rounded-full hover:bg-yellow-400 transition"
             >
-              {social.icon}
+              <MaskedIcon
+                src={social?.icon?.url ?? "#"}
+                size={28}
+                color="bg-white"
+                groupHoverColor="group-hover:bg-black"
+              />
             </Link>
           ))}
         </div>
