@@ -11,6 +11,17 @@ import FrequentlyQuestionSection from "@/components/Focus/FrequentlyQuestionSect
 import OurFocusSection from "@/components/Focus/OurFocusSection";
 import ServiceSection from "@/components/home/ServiceSection";
 import WhyChooseSection from "@/components/home/WhyChooseSection";
+import { getBlock, getStrapiURL } from "@/lib/utils";
+import {
+  BetterSectionBlock,
+  FaqBlock,
+  IndustoryComponentBlock,
+  OurVisionBlock,
+  ServicesComponent,
+  WhyChooseComponent,
+  WhyXizecBlock,
+  WhyXizecData,
+} from "@/types";
 import { title } from "process";
 import React from "react";
 
@@ -103,63 +114,52 @@ const whychoose = {
   ],
 };
 
-const frequentlyData = {
-  heading: {
-    title: "Frequently Asked Questions",
-    subtitle: "FAQ",
+const frequentlyData = [
+  {
+    question: "How do you handle project management and communication?",
+    answer:
+      "We use modern project management tools like Jira, Trello, and Slack to ensure smooth communication and collaboration. You'll get regular updates, milestones, and clear timelines.",
   },
-  faqs: [
-    {
-      question: "How do you handle project management and communication?",
-      answer:
-        "We use modern project management tools like Jira, Trello, and Slack to ensure smooth communication and collaboration. You'll get regular updates, milestones, and clear timelines.",
-    },
-    {
-      question: "What mobile app development services do you offer?",
-      answer:
-        "We provide end-to-end mobile app development, including iOS, Android, and cross-platform solutions. From strategy and design to development and deployment, we cover the full app lifecycle.",
-    },
-    {
-      question:
-        "What is the average cost and timeline for developing a mobile app?",
-      answer:
-        "The cost and timeline depend on the complexity and features of your app. Typically, small apps take 4-8 weeks, while complex enterprise solutions can take 3-6 months.",
-    },
-    {
-      question:
-        "Can you integrate AI or other emerging technologies into my app?",
-      answer:
-        "Absolutely! We specialize in AI, machine learning, IoT, blockchain, and other cutting-edge technologies to make your app innovative and future-ready.",
-    },
-    {
-      question: "Do you offer a free consultation or project estimate?",
-      answer:
-        "Yes, we provide a free initial consultation where we analyze your requirements and share a detailed project estimate with cost and timelines.",
-    },
-    {
-      question:
-        "What is the average cost and timeline for developing a mobile app?",
-      answer:
-        "The cost and timeline depend on the complexity and features of your app. Typically, small apps take 4-8 weeks, while complex enterprise solutions can take 3-6 months.",
-    },
-    {
-      question:
-        "Can you integrate AI or other emerging technologies into my app?",
-      answer:
-        "Absolutely! We specialize in AI, machine learning, IoT, blockchain, and other cutting-edge technologies to make your app innovative and future-ready.",
-    },
-    {
-      question: "Do you offer a free consultation or project estimate?",
-      answer:
-        "Yes, we provide a free initial consultation where we analyze your requirements and share a detailed project estimate with cost and timelines.",
-    },
-  ],
-  image: {
-    url: "/images/QuestionImg.png",
-    alternativeText: "image",
-    name: "name",
+  {
+    question: "What mobile app development services do you offer?",
+    answer:
+      "We provide end-to-end mobile app development, including iOS, Android, and cross-platform solutions. From strategy and design to development and deployment, we cover the full app lifecycle.",
   },
-};
+  {
+    question:
+      "What is the average cost and timeline for developing a mobile app?",
+    answer:
+      "The cost and timeline depend on the complexity and features of your app. Typically, small apps take 4-8 weeks, while complex enterprise solutions can take 3-6 months.",
+  },
+  {
+    question:
+      "Can you integrate AI or other emerging technologies into my app?",
+    answer:
+      "Absolutely! We specialize in AI, machine learning, IoT, blockchain, and other cutting-edge technologies to make your app innovative and future-ready.",
+  },
+  {
+    question: "Do you offer a free consultation or project estimate?",
+    answer:
+      "Yes, we provide a free initial consultation where we analyze your requirements and share a detailed project estimate with cost and timelines.",
+  },
+  {
+    question:
+      "What is the average cost and timeline for developing a mobile app?",
+    answer:
+      "The cost and timeline depend on the complexity and features of your app. Typically, small apps take 4-8 weeks, while complex enterprise solutions can take 3-6 months.",
+  },
+  {
+    question:
+      "Can you integrate AI or other emerging technologies into my app?",
+    answer:
+      "Absolutely! We specialize in AI, machine learning, IoT, blockchain, and other cutting-edge technologies to make your app innovative and future-ready.",
+  },
+  {
+    question: "Do you offer a free consultation or project estimate?",
+    answer:
+      "Yes, we provide a free initial consultation where we analyze your requirements and share a detailed project estimate with cost and timelines.",
+  },
+];
 
 const servicesData = {
   heading: {
@@ -336,17 +336,64 @@ const makeBetterData = {
   },
 };
 
-const page = () => {
+async function loader() {
+  const { fetchData } = await import("@/lib/api");
+
+  const path = "/api/why-xizec";
+
+  const baseUrl = getStrapiURL();
+
+  const url = new URL(path, baseUrl);
+
+  const data = await fetchData(url.href);
+
+  return data;
+}
+
+export default async function () {
+  const data = (await loader()) as WhyXizecData;
+  if (!data) return null;
+
+  const VisionData = getBlock<OurVisionBlock>(
+    data?.blocks,
+    "our-focus.our-vision"
+  );
+  const WhyChooseData = getBlock<WhyChooseComponent>(
+    data.blocks,
+    "landing-page.why-choose-component"
+  );
+  const ServiceData = getBlock<ServicesComponent>(
+    data.blocks,
+    "landing-page.services"
+  );
+  const BetterData = getBlock<BetterSectionBlock>(
+    data.blocks,
+    "why-xizec.better-section"
+  );
+  const IndustryData = getBlock<IndustoryComponentBlock>(
+    data.blocks,
+    "why-xizec.industory-component"
+  );
+
+  const FaqData = getBlock<FaqBlock>(data.blocks, "our-focus.faq");
+  const faqs = data?.faqs;
+
+  if (!VisionData) return null;
+  if (!IndustryData) return null;
+  if (!BetterData) return null;
+  if (!WhyChooseData) return null;
+  if (!ServiceData) return null;
+  if (!FaqData) return null;
+  if (!faqs) return null;
+
   return (
     <div className="flex flex-col gap-[60px] py-[80px]">
-      <OurFocusSection {...ourFocusData} rowReverse />
-      <WhyChooseSection whychoose={whychoose} />
-      <MakeBetterSection data={makeBetterData} />
-      <IndustorySection data={industoryData} />
-      <ServiceSection data={servicesData} bgWhite />
-      <FrequentlyQuestionSection data={frequentlyData} />
+      <OurFocusSection VisionData={VisionData} rowReverse />
+      <WhyChooseSection WhyChooseData={WhyChooseData} />
+      <MakeBetterSection BetterData={BetterData} />
+      <IndustorySection IndustryData={IndustryData} />
+      <ServiceSection ServiceData={ServiceData} bgWhite />
+      <FrequentlyQuestionSection data={faqs} FaqData={FaqData} />
     </div>
   );
-};
-
-export default page;
+}

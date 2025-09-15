@@ -86,7 +86,7 @@ export const MouseIcon = () => (
       stroke="white"
       strokeWidth="2"
     />
-    <rect x="13" y="6" width="4" height="10" rx="2" fill="white" />
+    {/* <rect x="13" y="6" width="4" height="10" rx="2" fill="white" /> */}
   </svg>
 );
 

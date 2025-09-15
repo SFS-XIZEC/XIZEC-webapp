@@ -53,8 +53,8 @@ const ServiceSection: React.FC<{
                 <MaskedIcon
                   src={service?.image?.url}
                   color="bg-black"
-                  groupHoverColor="group-hover:text-primary"
-                  hoverColor="group-hover:text-primary"
+                  groupHoverColor="group-hover:bg-primary"
+                  hoverColor="hover:bg-primary"
                   size={24}
                 />
               </div>

@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { Form, Input, message } from "antd";
+import React, { useState, useTransition } from "react";
+import { App, Form, Input } from "antd";
 import ReCAPTCHA from "react-google-recaptcha";
 import CommonButton from "./CommonButton";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import PhoneInput from "react-phone-input-2";
+import { submitForm } from "@/action/submitForm";
 
 interface FormProp {
   fullName: string;
@@ -20,27 +21,35 @@ const FormComponent: React.FC<{
 }> = ({ textColor, isContact = false, isModal = false }) => {
   const [form] = Form.useForm();
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
+  const { message } = App.useApp();
+  const [isPending, startTransition] = useTransition();
 
   const onFinish = (values: FormProp) => {
-    let phoneNo = "";
-    let countryCode = "";
+    // if (!captchaValue) {
+    //   message.error("Please complete the reCAPTCHA before submitting!");
+    //   return;
+    // }
 
-    const parsed = parsePhoneNumberFromString(String("+" + values.phone));
-    if (!parsed || !parsed?.isValid()) {
-      return;
-    }
-    countryCode = `+${parsed.countryCallingCode}`;
-    phoneNo = parsed.nationalNumber;
-    if (!captchaValue) {
-      message.error("Please complete the reCAPTCHA before submitting!");
-      return;
-    }
-    const data = { ...values, phoneNo, countryCode };
+    // const parsed = parsePhoneNumberFromString("+" + values.phone)!;
+    // const countryCode = `+${parsed.countryCallingCode}`;
+    // const phoneNo = parsed.nationalNumber;
 
-    console.log("Form Data:", data);
-    message.success("Form submitted successfully!");
-    form.resetFields();
-    setCaptchaValue(null);
+    const payload = {
+      ...values,
+      // recaptchaToken: captchaValue,
+    };
+
+    startTransition(async () => {
+      try {
+        await submitForm(payload);
+        message.success("Form submitted successfully!");
+        form.resetFields();
+        setCaptchaValue(null);
+      } catch (err) {
+        console.error(err);
+        message.error("Error submitting form. Please try again.");
+      }
+    });
   };
 
   return (
@@ -52,7 +61,9 @@ const FormComponent: React.FC<{
       requiredMark={false}
     >
       <div
-        className={`grid ${isContact ? "grid-cols-1" : "lg:grid-cols-2 lg:gap-3"}`}
+        className={`grid ${
+          isContact ? "grid-cols-1" : "lg:grid-cols-2 lg:gap-3"
+        }`}
       >
         {/* Full Name */}
         <Form.Item
@@ -113,6 +124,24 @@ const FormComponent: React.FC<{
             Mobile Number
           </span>
         }
+        rules={[
+          { required: true, message: "Please enter your phone number!" },
+          {
+            validator: (_, value) => {
+              if (!value) return Promise.resolve();
+
+              try {
+                const parsed = parsePhoneNumberFromString("+" + value);
+                if (parsed && parsed.isValid()) {
+                  return Promise.resolve();
+                }
+                return Promise.reject("Please enter a valid phone number!");
+              } catch (err) {
+                return Promise.reject("Invalid phone number format!");
+              }
+            },
+          },
+        ]}
       >
         <div>
           <PhoneInput
@@ -163,7 +192,7 @@ const FormComponent: React.FC<{
         onChange={(value) => setCaptchaValue(value)}
       />
 
-      <Form.Item className="!mb-0">
+      <Form.Item className="md:!mb-0">
         <CommonButton
           text="Submit"
           className={`w-full mt-6 ${isModal && "!bg-black !text-white"}`}

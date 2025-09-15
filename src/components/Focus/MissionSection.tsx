@@ -1,37 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import SectionHeading from "../SectionHeading";
-import CommonButton from "../CommonButton";
 import HireCard from "../HireCard";
+import { OurMissionBlock } from "@/types";
+import { StrapiImage } from "../StrapiImage";
 
-export interface MissionSectionType {
-  heading: {
-    title: string;
-    subtitle: string;
-    description: string;
-  };
-  image1: {
-    name: string;
-    alternativeText: string;
-    url: string;
-  };
-  image2: {
-    name: string;
-    alternativeText: string;
-    url: string;
-  };
-  cta: {
-    title: string;
-    subtitle: string;
-  };
-}
-
-interface Props {
-  data: MissionSectionType;
-}
-
-const MissionSection: React.FC<Props> = ({ data }) => {
+const MissionSection: React.FC<{ MissionData: OurMissionBlock }> = ({
+  MissionData,
+}) => {
   const cardRef = useRef<HTMLImageElement>(null);
   const [isMount, setIsMount] = useState(false);
   const [cardWidth, setcardWidth] = useState(0);
@@ -52,20 +28,20 @@ const MissionSection: React.FC<Props> = ({ data }) => {
         className="grid lg:grid-cols-2 items-center gap-12 h-full"
       >
         <div className="flex flex-col justify-between">
-          <SectionHeading invert heading={data.heading} />
+          <SectionHeading invert heading={MissionData?.heading} />
           <div className="rounded-lg overflow-hidden">
-            <Image
-              src={data.image1.url}
-              alt={data.image1.alternativeText}
+            <StrapiImage
+              src={MissionData.image1.url}
+              alt={MissionData.image1.name}
               width={500}
               height={560}
             />
           </div>
         </div>
         <div className="rounded-lg overflow-hidden">
-          <Image
-            src={data.image2.url}
-            alt={data.image2.alternativeText}
+          <StrapiImage
+            src={MissionData.image2.url}
+            alt={MissionData.image2.name}
             width={500}
             height={800}
           />
@@ -75,7 +51,7 @@ const MissionSection: React.FC<Props> = ({ data }) => {
       <HireCard
         className="absolute -bottom-[100px]"
         cardWidth={cardWidth}
-        data={data?.cta}
+        data={MissionData?.HireCard}
       />
     </section>
   );

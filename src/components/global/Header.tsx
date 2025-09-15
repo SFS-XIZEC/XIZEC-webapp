@@ -11,17 +11,30 @@ import MenuDrawer from "../MenuDrawer";
 import { StrapiImage } from "../StrapiImage";
 import { GlobalApi, HeroSection } from "@/types";
 import { getStrapiURL } from "@/lib/utils";
+import ScrollMouse from "../ScrollMouse";
 
 export default function Header({ data }: { data: GlobalApi }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [heroContent, setHeroContent] = useState<HeroSection | null>(null);
+  const [fade, setFade] = useState(1);
 
   const ContactData = data?.CommonData?.contacts;
   const SocialLinks = data?.CommonData?.socialLinks;
   const FormSection = data?.FormSection;
   const headerData = data?.Header;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const fadeValue = Math.max(1 - scrollY / 400, 0);
+      setFade(fadeValue);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // 🔎 Select correct hero section by slug/path
   useEffect(() => {
@@ -41,7 +54,7 @@ export default function Header({ data }: { data: GlobalApi }) {
   return (
     <div
       className="relative bg-center h-screen bg-no-repeat lg:bg-cover flex flex-col font-sans"
-      style={{ backgroundImage }}
+      style={{ backgroundImage, opacity: fade }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/80 z-0"></div>
@@ -64,7 +77,6 @@ export default function Header({ data }: { data: GlobalApi }) {
       <div className="flex flex-col gap-6 justify-between items-center relative z-10">
         <Banner banner={data?.Banner} />
         <header className="flex justify-between w-full max-lg:px-2 items-center bg-transparent text-white lg:w-[90%]">
-          {/* Logo + Drawer */}
           <div className="flex gap-3">
             <button
               onClick={() => setDrawerOpen(true)}
@@ -88,8 +100,8 @@ export default function Header({ data }: { data: GlobalApi }) {
                 key={index}
                 href={link.href}
                 target={link?.isExternal ? "_blank" : "_self"}
-                className={`hover:text-primary hover:underline underline-offset-8 leading-[150%] transition-colors duration-200 ${
-                  pathname === link?.href ? "text-primary" : ""
+                className={`hover:!text-primary hover:!underline underline-offset-8 leading-[150%] transition-colors duration-200 ${
+                  pathname === link?.href ? "!text-primary" : "!text-white"
                 }`}
               >
                 {link.text}
@@ -134,11 +146,7 @@ export default function Header({ data }: { data: GlobalApi }) {
             />
           ))}
       </div>
-      <div className="relative z-10 flex items-center justify-center mb-[30px]">
-        <span className="cursor-pointer">
-          <MouseIcon />
-        </span>
-      </div>
+      <ScrollMouse targetId="about" />
     </div>
   );
 }

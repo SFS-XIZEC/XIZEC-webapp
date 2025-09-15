@@ -19,12 +19,15 @@ const MaskedIcon: React.FC<IconProps> = ({
   if (!src) return null;
   const imageUrl = getStrapiMedia(src);
   const imageFallback = `https://placehold.co/${size}x${size}`;
+
+  const isHexOrCss = color?.startsWith("#") || color?.startsWith("rgb");
   return (
     <div
-      className={`${color} ${hoverColor} ${groupHoverColor} transition-colors duration-300`}
+      className={`${!isHexOrCss ? color : ""}  ${hoverColor} ${groupHoverColor} transition-colors duration-300`}
       style={{
         width: `${size}px`,
         height: `${size}px`,
+        backgroundColor: isHexOrCss ? color : undefined,
         WebkitMask: `url(${
           imageUrl || imageFallback
         }) no-repeat center / contain`,

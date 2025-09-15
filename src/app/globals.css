@@ -86,3 +86,27 @@ background-color: #ffffff !important;
   padding: 0 !important;
   border-radius: 12px !important;
 }
+
+@keyframes scrollBounce {
+  0% {
+    bottom: 20%;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  80%{
+    opacity: 0;
+  }
+  100% {
+    bottom: 80%;
+    opacity: 0;
+  }
+}
+
+.animate-scrollBounce {
+  animation: scrollBounce 1.5s infinite;
+}

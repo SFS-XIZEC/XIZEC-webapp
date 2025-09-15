@@ -2,6 +2,14 @@ import CollaboratorSection from "@/components/client/CollaboratorSection";
 import HireCard from "@/components/HireCard";
 import PortfolioSection from "@/components/home/PortfolioSection";
 import TestimonialSection from "@/components/home/TestimonialSection";
+import { getBlock, getStrapiURL } from "@/lib/utils";
+import {
+  ClientComponent,
+  ClientsData,
+  HireCardBlock,
+  PortfolioComponent,
+  TestimonialBlock,
+} from "@/types";
 import React from "react";
 
 const collaboratorData = {
@@ -74,9 +82,10 @@ const collaboratorData = {
 };
 
 const Hiredata = {
-  title:"Hire us for your project",
-  subtitle:"Transform Your Vision with Expert IT Consulting and Future-Ready Solutions"
-}
+  title: "Hire us for your project",
+  subtitle:
+    "Transform Your Vision with Expert IT Consulting and Future-Ready Solutions",
+};
 
 const portfolioData = {
   heading: {
@@ -203,15 +212,55 @@ const TestimonialData = {
     },
   ],
 };
-const page = () => {
+
+async function loader() {
+  const { fetchData } = await import("@/lib/api");
+
+  const path = "/api/client";
+
+  const baseUrl = getStrapiURL();
+
+  const url = new URL(path, baseUrl);
+
+  const data = await fetchData(url.href);
+
+  return data;
+}
+export default async function page() {
+  const data = (await loader()) as ClientsData;
+  if (!data) return null;
+
+  console.log(data);
+  const CollaboraterData = getBlock<ClientComponent>(
+    data?.blocks,
+    "landing-page.client-component"
+  );
+  const HireData = getBlock<HireCardBlock>(data?.blocks, "common.hire-card");
+
+  const PortfolioData = getBlock<PortfolioComponent>(
+    data.blocks,
+    "landing-page.portfolio"
+  );
+  const TestimonialData = getBlock<TestimonialBlock>(
+    data.blocks,
+    "landing-page.testimonial"
+  );
+  const Testimonial = data?.testimonials;
+
+  if (!PortfolioData) return null;
+  if (!CollaboraterData) return null;
+  if (!HireData) return null;
+  if (!TestimonialData) return null;
+  if (!Testimonial) return null;
   return (
     <div className="flex flex-col gap-[80px] pt-[80px] pb-[120px]">
-      <CollaboratorSection data={collaboratorData} />
-      <HireCard className="w-[80%] mx-auto" data={Hiredata}/>
-      <PortfolioSection data={portfolioData} margin={"0px"}/>
-      <TestimonialSection data={TestimonialData} />
+      <CollaboratorSection CollaboraterData={CollaboraterData} />
+      <HireCard className="w-[80%] mx-auto" data={HireData} />
+      <PortfolioSection margin="mt-0" PortfolioData={PortfolioData} />
+      <TestimonialSection
+        TestimonialData={TestimonialData}
+        Testimonial={Testimonial}
+      />
     </div>
   );
-};
-
-export default page;
+}

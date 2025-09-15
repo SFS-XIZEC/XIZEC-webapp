@@ -7,6 +7,7 @@ import "react-phone-input-2/lib/style.css";
 import FormSecton from "@/components/global/FormSection";
 import { getStrapiURL } from "@/lib/utils";
 import { GlobalApi } from "@/types";
+import { App } from "antd";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -47,14 +48,20 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${workSans.variable} antialiased scrollbar-hide`}>
-        <Header data={data} />
-        {children}
-        <FormSecton ContactData={ContactData} FormSection={FormSection} SocialLinks={SocialLinks}/>
-        <Footer
-          ContactData={ContactData}
-          FooterData={FooterData}
-          SocialLinks={SocialLinks}
-        />
+        <App>
+          <Header data={data} />
+          {children}
+          <FormSecton
+            ContactData={ContactData}
+            FormSection={FormSection}
+            SocialLinks={SocialLinks}
+          />
+          <Footer
+            ContactData={ContactData}
+            FooterData={FooterData}
+            SocialLinks={SocialLinks}
+          />
+        </App>
       </body>
     </html>
   );

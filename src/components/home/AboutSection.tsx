@@ -8,7 +8,10 @@ const AboutSection: React.FC<{ AboutData: AboutComponent }> = ({
   AboutData,
 }) => {
   return (
-    <section className="bg-white flex flex-col lg:gap-16 px-6 md:px-12 lg:px-20">
+    <section
+      id="about"
+      className="bg-white flex flex-col lg:gap-16 px-6 md:px-12 lg:px-20"
+    >
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
         <div className="flex gap-5 justify-center lg:justify-start">
           <StrapiImage
@@ -49,10 +52,10 @@ const AboutSection: React.FC<{ AboutData: AboutComponent }> = ({
           <div key={index} className="">
             <div className="flex items-center justify-between h-40">
               <div className="flex flex-col items-center p-2 lg:px-10 lg:py-3">
-                <div className="text-black text-[64px] font-semibold leading-[120%]">
+                <div className="text-black text-[54px] md:text-[64px] font-semibold leading-12 md:leading-14">
                   {stat.value}+
                 </div>
-                <div className="text-[#5C5C5C] lg:mt-2 text-center text-[14px] lg:text-[18px] leading-[120%]">
+                <div className="text-[#5C5C5C] text-center text-[12px] sm:text-[14px] md:text-[18px]">
                   {stat.data}
                 </div>
               </div>

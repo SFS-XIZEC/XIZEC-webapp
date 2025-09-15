@@ -1,25 +1,10 @@
 import React from "react";
 import SectionHeading from "../SectionHeading";
 import { Carousel } from "antd";
+import { OurStepsBlock } from "@/types";
 
-// types/ourProcess.ts
-
-export interface ProcessStep {
-  title: string;
-  description: string;
-}
-
-export interface OurProcess {
-  heading: {
-    subtitle: string;
-    title: string;
-    description: string;
-  };
-  steps: ProcessStep[];
-}
-
-const ProcessSection: React.FC<{ OurProcess: OurProcess }> = ({
-  OurProcess,
+const ProcessSection: React.FC<{ StepData: OurStepsBlock }> = ({
+  StepData,
 }) => {
   const settings = {
     dots: true,
@@ -51,10 +36,10 @@ const ProcessSection: React.FC<{ OurProcess: OurProcess }> = ({
   };
   return (
     <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
-      <SectionHeading heading={OurProcess?.heading} alignCenter />
+      <SectionHeading heading={StepData?.heading} alignCenter />
 
       <Carousel prefixCls="custom-dots" {...settings}>
-        {OurProcess?.steps.map((step, index) => (
+        {StepData?.cards.map((step, index) => (
           <div key={index} className="flex">
             <div className="flex items-center">
               <div className="p-8 rounded-[24px] border-[1px] border-[#6B6B6B] min-h-[340px] flex flex-col  gap-8">

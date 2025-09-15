@@ -1,10 +1,10 @@
 import React from "react";
 import CommonButton from "./CommonButton";
-import { HireCardProp } from "@/types";
+import { HireCardBlock, HireCardProp } from "@/types";
 import Link from "next/link";
 
 const HireCard: React.FC<{
-  data: HireCardProp;
+  data: HireCardProp | HireCardBlock;
   cardWidth?: number;
   className?: string;
 }> = ({ data, cardWidth, className }) => {
@@ -20,7 +20,7 @@ const HireCard: React.FC<{
         <h3 className="text-[32px] lg:text-[56px] font-bold leading-[120%]">
           {data.title}
         </h3>
-        <p className="lg:text-[20px]">{data.description}</p>
+        <p className="lg:text-[20px]">{data?.description}</p>
       </div>
       {data?.Button?.text &&
         (data.Button.href ? (

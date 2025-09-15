@@ -16,40 +16,23 @@ const PortfolioSection: React.FC<{
       <SectionHeading alignCenter heading={PortfolioData?.heading} />
 
       <div className="w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-6">
-            {PortfolioData?.images.map(
-              (img, index) =>
-                (index + 1) % 2 === 0 && (
-                  <div key={index} className="relative w-full h-auto">
-                    <StrapiImage
-                      src={img.url}
-                      alt={img.name}
-                      width={600}
-                      height={400}
-                      className="rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300"
-                    />
-                  </div>
-                )
-            )}
-          </div>
-
-          <div className="space-y-6">
-            {PortfolioData?.images.map(
-              (img, index) =>
-                (index + 1) % 2 !== 0 && (
-                  <div key={index} className="relative w-full h-auto">
-                    <StrapiImage
-                      src={img.url}
-                      alt={img.name}
-                      width={600}
-                      height={400}
-                      className="rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300"
-                    />
-                  </div>
-                )
-            )}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PortfolioData?.images.map((img, index) => (
+            <div
+              key={index}
+              className={`relative w-full h-auto ${
+                index % 5 === 0 ? "md:row-span-2" : ""
+              }`}
+            >
+              <StrapiImage
+                src={img.url}
+                alt={img.name}
+                width={600}
+                height={400}
+                className="h-full w-full object-cover rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300"
+              />
+            </div>
+          ))}
         </div>
       </div>
 

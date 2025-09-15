@@ -1,37 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import SectionHeading from "../SectionHeading";
 import HireCard from "../HireCard";
-
-export interface ServiceCard {
-  title: string;
-  description: string;
-}
-
-export interface MakeBetterProp {
-  heading: {
-    title: string;
-    subtitle: string;
-    description: string;
-  };
-  services: ServiceCard[];
-  image: {
-    name: string;
-    alternativeText: string;
-    url: string;
-  };
-  cta: {
-    title: string;
-    subtitle: string;
-    buttonText: string;
-    buttonLink: string;
-  };
-}
+import { BetterSectionBlock } from "@/types";
+import { StrapiImage } from "../StrapiImage";
 
 const MakeBetterSection: React.FC<{
-  data: MakeBetterProp;
-}> = ({ data }) => {
+  BetterData: BetterSectionBlock;
+}> = ({ BetterData }) => {
   const cardRef = useRef<HTMLImageElement>(null);
   const [isMount, setIsMount] = useState(false);
   const [cardWidth, setcardWidth] = useState(0);
@@ -52,26 +28,25 @@ const MakeBetterSection: React.FC<{
     >
       <div ref={cardRef} className="grid lg:grid-cols-2 items-center gap-12">
         <div className="rounded-lg overflow-hidden">
-          <Image
-            src={data.image.url}
-            alt={data.image.alternativeText}
+          <StrapiImage
+            src={BetterData.image.url}
+            alt={BetterData.image.name}
             width={500}
             height={800}
           />
         </div>
 
         <div className="flex flex-col gap-10 ">
-          <SectionHeading invert heading={data.heading} />
+          <SectionHeading invert heading={BetterData?.heading} />
           <div className="flex flex-col gap-6">
-            {data.services.map((service, index) => (
-              <div
-                key={index}
-                className={`flex gap-2 text-white w-full`}
-              >
+            {BetterData?.cards.map((service, index) => (
+              <div key={index} className={`flex gap-2 text-white w-full`}>
                 <div className=" min-w-3 h-3 bg-primary rounded-full"></div>
 
                 <div className="flex flex-col gap-2">
-                  <h4 className="text-lg font-bold leading-[70%]">{service.title}</h4>
+                  <h4 className="text-lg font-bold leading-[70%]">
+                    {service.title}
+                  </h4>
                   <p>{service.description}</p>
                 </div>
               </div>
@@ -82,7 +57,7 @@ const MakeBetterSection: React.FC<{
       <HireCard
         className="absolute -bottom-[100px]"
         cardWidth={cardWidth}
-        data={data?.cta}
+        data={BetterData?.HireCard}
       />
     </section>
   );

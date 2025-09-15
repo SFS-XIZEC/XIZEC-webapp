@@ -34,7 +34,7 @@ const Banner: React.FC<{ banner: BannerItem[] }> = ({ banner }) => {
             /> */}
 
             <MaskedIcon src={image?.url} size={24} />
-            <p className="text-[16px]">{value}</p>
+            <p className="text-black text-[14px] sm:text-[16px]">{value}</p>
           </Link>
         );
       })}

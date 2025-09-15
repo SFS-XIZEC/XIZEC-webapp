@@ -1,30 +1,17 @@
 import Image from "next/image";
 import CommonButton from "../CommonButton";
 import SectionHeading from "../SectionHeading";
+import { OurVisionBlock } from "@/types";
+import { StrapiImage } from "../StrapiImage";
+import Link from "next/link";
 
 interface OurFocusProps {
-  images: {
-    url: string;
-    alternativeText: string;
-    name: string;
-  };
-  subtitle: string;
-  title: string;
-  description: string;
-  link: {
-    text: string;
-    href: string;
-    isExternal: boolean;
-  };
+  VisionData: OurVisionBlock;
   rowReverse?: boolean;
 }
 
 const OurFocusSection: React.FC<OurFocusProps> = ({
-  images,
-  subtitle,
-  title,
-  description,
-  link,
+  VisionData,
   rowReverse = false,
 }) => {
   return (
@@ -34,9 +21,9 @@ const OurFocusSection: React.FC<OurFocusProps> = ({
       } flex flex-col lg:flex-row gap-6 lg:gap-12 items-center bg-white px-6 md:px-12 lg:px-20`}
     >
       <div className="lg:w-[50%] flex gap-5 justify-center lg:justify-start">
-        <Image
-          src={images.url}
-          alt={images.name}
+        <StrapiImage
+          src={VisionData?.image.url}
+          alt={VisionData?.image.name}
           width={617}
           height={600}
           className=""
@@ -44,14 +31,26 @@ const OurFocusSection: React.FC<OurFocusProps> = ({
       </div>
 
       <div className="lg:w-[50%] flex flex-col gap-6 items-start justify-between">
-        <SectionHeading heading={{ subtitle: subtitle, title: title }} />
+        <SectionHeading heading={VisionData?.heading} />
 
-        <div
+        {/* <div
           className="text-textcolor leading-relaxed"
           dangerouslySetInnerHTML={{ __html: description }}
-        />
+        /> */}
 
-        <CommonButton text={link.text} />
+        {VisionData?.heading?.Button?.text &&
+          (VisionData?.heading?.Button.href ? (
+            <Link
+              href={VisionData?.heading?.Button.href}
+              target={
+                VisionData?.heading?.Button.isExternal ? "_blank" : "_self"
+              }
+            >
+              <CommonButton text={VisionData?.heading?.Button.text} />
+            </Link>
+          ) : (
+            <CommonButton text={VisionData?.heading?.Button.text} />
+          ))}
       </div>
     </div>
   );
