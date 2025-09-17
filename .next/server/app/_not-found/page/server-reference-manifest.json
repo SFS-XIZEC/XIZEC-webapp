@@ -1,0 +1,20 @@
+{
+  "node": {
+    "405bc5142b56610b62d3974c1b917c35e97e91476f": {
+      "workers": {
+        "app/_not-found/page": {
+          "moduleId": "93980",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        }
+      },
+      "layer": {
+        "app/_not-found/page": "action-browser"
+      },
+      "exportedName": "submitForm",
+      "filename": "src/action/submitForm.ts"
+    }
+  },
+  "edge": {}
+}

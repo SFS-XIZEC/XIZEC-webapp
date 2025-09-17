@@ -1,0 +1,20 @@
+{
+  "node": {
+    "405bc5142b56610b62d3974c1b917c35e97e91476f": {
+      "workers": {
+        "app/clients/page": {
+          "moduleId": "40468",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        }
+      },
+      "layer": {
+        "app/clients/page": "action-browser"
+      },
+      "exportedName": "submitForm",
+      "filename": "src/action/submitForm.ts"
+    }
+  },
+  "edge": {}
+}
