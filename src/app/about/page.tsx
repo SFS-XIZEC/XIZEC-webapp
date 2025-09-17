@@ -296,12 +296,12 @@ const historyData = {
 const page = () => {
   return (
     <div className="flex flex-col gap-[60px] py-[80px] ">
-      <AboutSection {...aboutData} />
-      <HistorySection data={historyData} />
-      <LeaderSection data={leaderData} />
-      <OurTeam data={ourTeamData} />
-      <TestimonialSection data={TestimonialData} />
-      <ClientSection data={clientData} isCarousel />
+      {/* <AboutSection {...aboutData} /> */}
+      {/* <HistorySection data={historyData} /> */}
+      {/* <LeaderSection data={leaderData} />
+      <OurTeam data={ourTeamData} /> */}
+      {/* <TestimonialSection data={TestimonialData} />
+      <ClientSection data={clientData} isCarousel /> */}
     </div>
   );
 };

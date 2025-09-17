@@ -51,7 +51,7 @@ const OurTeam: React.FC<{ data: OurteamProp }> = ({ data }) => {
   };
   return (
     <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
-      <SectionHeading heading={data?.heading} alignCenter />
+      {/* <SectionHeading heading={data?.heading} alignCenter /> */}
 
       <div className="hidden lg:grid lg:grid-cols-4 gap-6">
         {data?.team.map((item, index) => (

@@ -50,7 +50,7 @@ const TestimonialSection: React.FC<{
         <Carousel prefixCls="custom-dots" {...settings}>
           {Testimonial?.map((testimonial, index) => (
             <div key={index} className="flex justify-center ">
-              <div className="bg-[#F4F2EA] mr-10 p-4 rounded-[15px] flex flex-col justify-between gap-3 min-h-[420px] min-w-[250px]">
+              <div className="bg-[#F4F2EA] mx-2 p-4 rounded-[15px] flex flex-col justify-between gap-3 min-h-[420px] min-w-[250px]">
                 <div className="flex flex-col items-start gap-3">
                   <div className="text-center flex gap-2">
                     <Rate defaultValue={testimonial.rating} disabled />{" "}

@@ -78,7 +78,7 @@ const ContactMain: React.FC<{ data: contactProp }> = ({ data }) => {
             <RightOutlined />
           </button>
           <Carousel ref={carouselRef} {...settings} className="lg:!px-10">
-            {data?.reviews.map((testimonial: any, index: number) => (
+            {data?.reviews.map((testimonial, index: number) => (
               <div key={index} className="flex justify-center">
                 <div className="bg-[#F4F2EA] mr-2 lg:mr-5 p-2 lg:p-5 rounded-[15px] flex flex-col justify-between gap-4 min-h-[420px] max-w-[350px] shadow">
                   <div className="flex flex-col items-start gap-3">

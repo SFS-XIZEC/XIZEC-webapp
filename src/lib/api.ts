@@ -22,7 +22,7 @@ export async function fetchData(url: string, authToken?: string) {
 
 export async function postData<T>(
   url: string,
-  body: Record<string, any>,
+  body: Record<string, unknown>,
   authToken?: string
 ): Promise<T> {
   console.log(url,body)

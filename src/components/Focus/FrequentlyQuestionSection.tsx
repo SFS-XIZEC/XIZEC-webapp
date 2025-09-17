@@ -23,14 +23,14 @@ const FrequentlyQuestionSection: React.FC<{
           {data?.map((faq, index) => (
             <div
               key={index}
-              className="border-b border-gray-300 pb-4 cursor-pointer"
+              className="border-b border-gray-300 pb-4 cursor-pointer z-50 "
             >
               <div
                 className="flex justify-between items-center"
                 onClick={() => toggleFAQ(index)}
               >
                 <h3 className="text-lg font-medium">{faq.question}</h3>
-                <span className="text-gray-500 z-50">
+                <span className="text-gray-500 ">
                   {openIndex === index ? (
                     <MinusOutlined size={20} />
                   ) : (
@@ -39,15 +39,19 @@ const FrequentlyQuestionSection: React.FC<{
                 </span>
               </div>
 
-              {openIndex === index && (
-                <p className="mt-3 text-gray-600 leading-relaxed">
-                  {faq.answer}
-                </p>
-              )}
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openIndex === index
+                    ? "max-h-40 opacity-100 mt-3"
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+              </div>
             </div>
           ))}
         </div>
-        <div className="hidden lg:block absolute bottom-0 left-0">
+        <div className="hidden md:block absolute bottom-0 left-0">
           <StrapiImage
             src={FaqData?.image.url}
             alt={FaqData?.image.name}
@@ -55,7 +59,7 @@ const FrequentlyQuestionSection: React.FC<{
             height={400}
           />
         </div>
-        <div className="hidden lg:block absolute top-0 right-0">
+        <div className="hidden md:block absolute top-0 right-0">
           <StrapiImage
             src={FaqData?.image.url}
             alt={FaqData?.image.name}

@@ -146,7 +146,7 @@ export default function Header({ data }: { data: GlobalApi }) {
             />
           ))}
       </div>
-      <ScrollMouse targetId="about" />
+      {pathname === "/" && <ScrollMouse targetId="about" />}
     </div>
   );
 }
