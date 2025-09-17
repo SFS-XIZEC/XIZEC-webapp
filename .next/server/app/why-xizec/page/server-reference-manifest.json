@@ -1,0 +1,20 @@
+{
+  "node": {
+    "405bc5142b56610b62d3974c1b917c35e97e91476f": {
+      "workers": {
+        "app/why-xizec/page": {
+          "moduleId": "36666",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        }
+      },
+      "layer": {
+        "app/why-xizec/page": "action-browser"
+      },
+      "exportedName": "submitForm",
+      "filename": "src/action/submitForm.ts"
+    }
+  },
+  "edge": {}
+}

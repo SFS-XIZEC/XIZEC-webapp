@@ -1,0 +1,63 @@
+{
+  "node": {
+    "405bc5142b56610b62d3974c1b917c35e97e91476f": {
+      "workers": {
+        "app/_not-found/page": {
+          "moduleId": "93980",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/about/page": {
+          "moduleId": "34707",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/clients/page": {
+          "moduleId": "40468",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/contact/page": {
+          "moduleId": "25023",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/our-focus/page": {
+          "moduleId": "93688",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/page": {
+          "moduleId": "9218",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/why-xizec/page": {
+          "moduleId": "36666",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        }
+      },
+      "layer": {
+        "app/_not-found/page": "action-browser",
+        "app/about/page": "action-browser",
+        "app/clients/page": "action-browser",
+        "app/contact/page": "action-browser",
+        "app/our-focus/page": "action-browser",
+        "app/page": "action-browser",
+        "app/why-xizec/page": "action-browser"
+      },
+      "filename": "src/action/submitForm.ts",
+      "exportedName": "submitForm"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "YaxP6fM7zA1zRgLpgW+hha6RxibLkbcFwrirIH4xuyc="
+}
