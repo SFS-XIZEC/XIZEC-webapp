@@ -1,17 +1,12 @@
+import { ClientComponent, Media } from "@/types";
 import { Carousel } from "antd";
-import Image from "next/image";
 import React from "react";
+import { StrapiImage } from "../StrapiImage";
 
-interface ClientProp {
-  url: string;
-  name: string;
-  alternativeText: string;
-}
-
-const ClientSection: React.FC<{ data: ClientProp[]; isCarousel?: boolean }> = ({
-  data,
-  isCarousel = false,
-}) => {
+const ClientSection: React.FC<{
+  ClientsData: Media[];
+  isCarousel?: boolean;
+}> = ({ ClientsData, isCarousel = false }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -43,12 +38,12 @@ const ClientSection: React.FC<{ data: ClientProp[]; isCarousel?: boolean }> = ({
   };
   return isCarousel ? (
     <Carousel prefixCls="custom-dots" {...settings} className="!mt-[80px]">
-      {data?.map((image, index) => (
+      {ClientsData?.map((image, index) => (
         <div
           key={index}
           className="flex justify-center px-[40px] py-[20px] rounded-[20px] border-[2px] border-[#EAEAEA]"
         >
-          <Image
+          <StrapiImage
             src={image?.url}
             alt={image?.name}
             width={200}
@@ -59,13 +54,13 @@ const ClientSection: React.FC<{ data: ClientProp[]; isCarousel?: boolean }> = ({
       ))}
     </Carousel>
   ) : (
-    <div className="grid grid-cols-4 ">
-      {data?.map((image, index) => (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      {ClientsData?.map((image, index) => (
         <div
           key={index}
-          className="flex justify-center px-[40px] py-[20px] rounded-[20px] border-[2px] border-[#EAEAEA]"
+          className="flex justify-center lg:px-[40px] p-1 lg:py-[20px] rounded-[20px] border-[1px] border-[#EAEAEA]"
         >
-          <Image
+          <StrapiImage
             src={image?.url}
             alt={image?.name}
             width={200}

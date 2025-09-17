@@ -1,96 +1,152 @@
-// components/Header.tsx
-import Image from "next/image";
+"use client";
 import Link from "next/link";
 import CommonButton from "../CommonButton";
 import { DrawerIcon, MouseIcon } from "@/common/icons";
 import Banner from "./Banner";
 import Heading from "../Heading";
+import { usePathname } from "next/navigation";
+import GetInTouchModal from "../GetInTouchModal";
+import { useEffect, useState } from "react";
+import MenuDrawer from "../MenuDrawer";
+import { StrapiImage } from "../StrapiImage";
+import { GlobalApi, HeroSection } from "@/types";
+import { getStrapiURL } from "@/lib/utils";
+import ScrollMouse from "../ScrollMouse";
 
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Our Focus", path: "/our-focus" },
-  { name: "Clients", path: "/clients" },
-  { name: "Why Xizec", path: "/why-xizec" },
-  { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" },
-];
+export default function Header({ data }: { data: GlobalApi }) {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [heroContent, setHeroContent] = useState<HeroSection | null>(null);
+  const [fade, setFade] = useState(1);
 
-const banner = [
-  {
-    id: "1",
-    href:"tel:2395550108",
-    image: {
-      id: 1,
-      url: "/images/phonelogo.png",
-      alternativeText: "logo",
-      name: "logo"
-    },
-    value: "(239) 555-0108"
-  },
-  {
-    id: "2",
-    href:"mailto:sara.cruz@example.com",
-    image: {
-      id: 2,
-      url: "/images/maillogo.png",
-      alternativeText: "logo",
-      name: "logo"
-    },
-    value: "sara.cruz@example.com"
-  }
-]
+  const ContactData = data?.CommonData?.contacts;
+  const SocialLinks = data?.CommonData?.socialLinks;
+  const FormSection = data?.FormSection;
+  const headerData = data?.Header;
 
-const headingData = {
-  head: "Welcome To XIZEC",
-  title:
-    "Transforming Businesses With Smart IT Solutions",
-  text: "At XIZEC, we empower companies with tailored technology strategies that drive growth, efficiency, and innovation. From IT consulting to digital transformation, our experts deliver solutions that solve today’s challenges and prepare you for tomorrow.",
-};
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const fadeValue = Math.max(1 - scrollY / 400, 0);
+      setFade(fadeValue);
+    };
 
-export default function Header() {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // 🔎 Select correct hero section by slug/path
+  useEffect(() => {
+    if (data?.CommonData?.HeroSection?.length) {
+      const matched = data.CommonData.HeroSection.find(
+        (item: HeroSection) => item.slug === pathname
+      );
+      setHeroContent(matched || null);
+    }
+  }, [pathname, data?.CommonData?.HeroSection]);
+
+  // ✅ background image with safe fallback
+  const backgroundImage = heroContent?.image?.url
+    ? `url(${getStrapiURL()}${heroContent.image.url})`
+    : "url('/images/homebg.png')";
+
   return (
-    <div className="bg-cover bg-no-repeat flex flex-col justify-between"
-      style={{
-        backgroundImage: "url('/images/homebg.png')",
-      }}>
-      <div className="flex flex-col gap-6 justify-between items-center">
-        <Banner banner={banner} />
-        <header className="flex justify-between items-center bg-transparent text-white w-[90%]">
-          <button className="md:hidden">
-            <DrawerIcon />
-          </button>
-          <Image
-            src={"/images/mainlogo.png"}
-            width={172}
-            height={48}
-            className={"object-cover"}
-            alt={"Hero Image"}
-          />
+    <div
+      className="relative bg-center h-screen bg-no-repeat lg:bg-cover flex flex-col font-sans"
+      style={{ backgroundImage, opacity: fade }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/80 z-0"></div>
 
-          {/* Navigation */}
-          <nav className="gap-8 hidden md:flex">
-            {navLinks.map((link, index) => (
+      <MenuDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        pathname={pathname}
+        navLinks={headerData?.NavLink}
+      />
+
+      <GetInTouchModal
+        open={open}
+        onClose={() => setOpen(false)}
+        ContactData={ContactData}
+        FormSection={FormSection}
+        SocialLinks={SocialLinks}
+      />
+
+      <div className="flex flex-col gap-6 justify-between items-center relative z-10">
+        <Banner banner={data?.Banner} />
+        <header className="flex justify-between w-full max-lg:px-2 items-center bg-transparent text-white lg:w-[90%]">
+          <div className="flex gap-3">
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="lg:hidden cursor-pointer"
+            >
+              <DrawerIcon />
+            </button>
+            <StrapiImage
+              src={headerData?.MainLogo?.image?.url}
+              width={172}
+              height={48}
+              className="object-cover"
+              alt={headerData?.MainLogo?.image?.name}
+            />
+          </div>
+
+          {/* Nav */}
+          <nav className="gap-8 hidden lg:flex">
+            {headerData?.NavLink?.map((link, index) => (
               <Link
                 key={index}
-                href={link.path}
-                className="hover:text-yellow-500 hover:underline underline-offset-8 leading-[150%] transition-colors duration-200"
+                href={link.href}
+                target={link?.isExternal ? "_blank" : "_self"}
+                className={`hover:!text-primary hover:!underline underline-offset-8 leading-[150%] transition-colors duration-200 ${
+                  pathname === link?.href ? "!text-primary" : "!text-white"
+                }`}
               >
-                {link.name}
+                {link.text}
               </Link>
             ))}
           </nav>
 
-          <CommonButton text={"Get Started"} />
+          {/* Header Button */}
+          {headerData?.Button?.text &&
+            (headerData.Button.href ? (
+              <Link
+                href={headerData.Button.href}
+                target={headerData.Button.isExternal ? "_blank" : "_self"}
+              >
+                <CommonButton text={headerData.Button.text} />
+              </Link>
+            ) : (
+              <CommonButton
+                text={headerData.Button.text}
+                onClick={() => setOpen(true)}
+              />
+            ))}
         </header>
       </div>
-      <div className='flex items-center justify-center'>
-        <Heading headingData={headingData} alingCenter />
+      <div
+        className={`relative z-10 flex flex-col items-center justify-center h-full gap-10 lg:gap-5`}
+      >
+        {heroContent && <Heading headingData={heroContent} alingCenter />}
+
+        {heroContent?.Button?.text &&
+          (heroContent.Button.href ? (
+            <Link
+              href={heroContent.Button.href}
+              target={heroContent.Button.isExternal ? "_blank" : "_self"}
+            >
+              <CommonButton text={heroContent.Button.text} />
+            </Link>
+          ) : (
+            <CommonButton
+              text={heroContent.Button.text}
+              onClick={() => setOpen(true)}
+            />
+          ))}
       </div>
-      <div className='flex items-center justify-center mt-[120px] mb-10'>
-        <MouseIcon />
-      </div>
+      <ScrollMouse targetId="about" />
     </div>
-
-
   );
 }

@@ -14,7 +14,7 @@ export default {
         textcolor: "var(--textcolor)",
       },
       fontFamily: {
-        poppins: "var(--font-poppins)",
+        sans: ["var(--font-work-sans)", "sans-serif"],
       },
     },
   },

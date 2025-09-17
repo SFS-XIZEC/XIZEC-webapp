@@ -5,6 +5,17 @@
 :root {
   --primary:#FFC300;
   --textcolor:#3D3D3D;
+   font-family: "Work Sans", sans-serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: 0px !important; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  scrollbar-width: 0px !important; /* Firefox */
+  display: none;
+   /* Chrome, Safari, Opera */
 }
 
 .custom-dots .slick-dots li{
@@ -53,4 +64,49 @@ background-color: #ffffff !important;
 
 .react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus {
   border-radius: 8px !important;
+}
+
+.custom-timeline .ant-timeline.ant-timeline-alternate .ant-timeline-item-head-custom{
+  background-color: transparent;
+}
+
+.custom-timeline .ant-timeline.ant-timeline-alternate .ant-timeline-item-tail{
+  background-color: #6B6B6B;
+}
+
+.custom-timeline .ant-timeline.ant-timeline-alternate .ant-timeline-item-left .ant-timeline-item-content{
+  inset-inline-start: calc(52% - 4px) !important;
+}
+
+.custom-timeline .ant-timeline.ant-timeline-alternate .ant-timeline-item-right .ant-timeline-item-content{
+  inset-inline-end: 30px !important;
+}
+
+.custom-modal .custom-modal-content {
+  padding: 0 !important;
+  border-radius: 12px !important;
+}
+
+@keyframes scrollBounce {
+  0% {
+    bottom: 20%;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  80%{
+    opacity: 0;
+  }
+  100% {
+    bottom: 80%;
+    opacity: 0;
+  }
+}
+
+.animate-scrollBounce {
+  animation: scrollBounce 1.5s infinite;
 }

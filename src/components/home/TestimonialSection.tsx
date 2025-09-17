@@ -3,26 +3,14 @@ import SectionHeading from "../SectionHeading";
 import { Carousel, Rate } from "antd";
 import Image from "next/image";
 import { NoProfilePic } from "@/common/icons";
+import { Testimonial, TestimonialBlock } from "@/types";
+import ReactMarkdown from "react-markdown";
+import { StrapiImage } from "../StrapiImage";
 
-interface ReviewProp {
-  id: number;
-  rating: number;
-  text: string;
-  name: string;
-  title: string;
-  avatar?: string;
-}
-
-interface TestimonialProp {
-  heading: {
-    title: string;
-    subtitle: string;
-    description: string;
-  };
-  reviews: ReviewProp[];
-}
-
-const TestimonialSection: React.FC<{ data: TestimonialProp }> = ({ data }) => {
+const TestimonialSection: React.FC<{
+  TestimonialData: TestimonialBlock;
+  Testimonial: Testimonial[];
+}> = ({ TestimonialData, Testimonial }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -54,28 +42,33 @@ const TestimonialSection: React.FC<{ data: TestimonialProp }> = ({ data }) => {
 
   return (
     <div className="flex flex-col gap-[60px] ">
-      <div className="w-[70%] mx-auto">
-        <SectionHeading alignCenter heading={data?.heading} />
+      <div className="lg:w-[70%] mx-auto">
+        <SectionHeading alignCenter heading={TestimonialData?.heading} />
       </div>
 
       <div className="w-full">
         <Carousel prefixCls="custom-dots" {...settings}>
-          {data?.reviews.map((testimonial, index) => (
+          {Testimonial?.map((testimonial, index) => (
             <div key={index} className="flex justify-center ">
               <div className="bg-[#F4F2EA] mr-10 p-4 rounded-[15px] flex flex-col justify-between gap-3 min-h-[420px] min-w-[250px]">
                 <div className="flex flex-col items-start gap-3">
-                  <div className="text-center flex gap-2"><Rate defaultValue={testimonial.rating} disabled />  <span className="font-bold">{testimonial.rating} </span></div>
-                  <p className="text-gray-700">{testimonial.text}</p>
+                  <div className="text-center flex gap-2">
+                    <Rate defaultValue={testimonial.rating} disabled />{" "}
+                    <span className="font-bold">{testimonial.rating} </span>
+                  </div>
+                  <div className="text-gray-700 flex flex-col gap-2">
+                    <ReactMarkdown>{testimonial.description}</ReactMarkdown>
+                  </div>
                 </div>
 
                 <div className="flex gap-3 items-center">
                   <div className="rounded-full overflow-hidden">
-                    {testimonial?.avatar ? (
-                      <Image
-                        src={testimonial?.avatar}
+                    {testimonial?.profile?.image ? (
+                      <StrapiImage
+                        src={testimonial?.profile?.image?.url}
                         width={48}
                         height={48}
-                        alt={testimonial.name}
+                        alt={testimonial.profile?.image?.name}
                       />
                     ) : (
                       <NoProfilePic />
@@ -83,9 +76,11 @@ const TestimonialSection: React.FC<{ data: TestimonialProp }> = ({ data }) => {
                   </div>
                   <div className="flex flex-col">
                     <h3 className="text-2xl font-bold">
-                      {testimonial.name}
+                      {testimonial?.profile?.name}
                     </h3>
-                    <p className="text-[#6B6B6B]">{testimonial.title}</p>
+                    <p className="text-[#6B6B6B]">
+                      {testimonial?.profile?.designation}
+                    </p>
                   </div>
                 </div>
               </div>
