@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import SectionHeading from "../SectionHeading";
 import HireCard from "../HireCard";
 import { Timeline } from "antd";
+import { Heading } from "@/types";
 
 export type TimelineItem = {
   year: string;
@@ -22,7 +23,7 @@ export type HistoryCTA = {
 };
 
 export type HistoryData = {
-  heading: HistoryHeading;
+  heading: Heading;
   timelineData: TimelineItem[];
   cta: HistoryCTA;
 };
@@ -102,11 +103,11 @@ const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
         </div>
       </div>
 
-      <HireCard
+      {/* <HireCard
         className="absolute -bottom-[100px]"
         cardWidth={cardWidth}
         data={data?.cta}
-      />
+      /> */}
     </div>
   );
 };

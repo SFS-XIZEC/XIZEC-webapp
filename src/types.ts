@@ -2,7 +2,7 @@ export interface PageProps {
   params: {
     slug: string;
   };
-  searchParams: {};
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
 // Base Strapi type for any entry
@@ -142,7 +142,7 @@ export interface GlobalApi extends StrapiBaseItem {
 // ========================
 export interface GlobalResponse {
   data: GlobalApi;
-  meta: Record<string, any>;
+  meta: Record<string, string>;
 }
 
 // Root API Response

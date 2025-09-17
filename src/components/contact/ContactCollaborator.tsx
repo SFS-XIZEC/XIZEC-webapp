@@ -77,13 +77,13 @@ const ContactCollaborator: React.FC<{ data: CollaboratorData }> = ({
           slidesToShow: 1,
           centerPadding: "0px",
         },
-      },
+      }, 
     ],
   };
   return (
     <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
       <div className="lg:w-[70%] mx-auto flex text-center">
-        <SectionHeading heading={data?.heading} alignCenter />
+        {/* <SectionHeading heading={data?.heading} alignCenter /> */}
       </div>
       <div className="flex flex-col gap-8">
         <Carousel prefixCls="custom-dots" {...settings1}>

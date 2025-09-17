@@ -350,7 +350,7 @@ async function loader() {
   return data;
 }
 
-export default async function () {
+export default async function WhyXizecPage() {
   const data = (await loader()) as WhyXizecData;
   if (!data) return null;
 

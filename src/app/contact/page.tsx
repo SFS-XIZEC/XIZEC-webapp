@@ -267,10 +267,10 @@ const mapsectiondata = {
 const page = () => {
   return (
     <div className="flex flex-col gap-[80px] pt-[80px] pb-[120px]">
-      <ContactMain data={contactdata} />
+      {/* <ContactMain data={contactdata} />
       <MapContactSection data={mapsectiondata} />
-      <ContactCollaborator data={collaboratorData} />
-      <FrequentlyQuestionSection data={frequentlyData} />
+      <ContactCollaborator data={collaboratorData} /> */}
+      {/* <FrequentlyQuestionSection data={frequentlyData} /> */}
     </div>
   );
 };

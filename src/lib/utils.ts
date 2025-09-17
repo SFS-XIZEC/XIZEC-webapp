@@ -1,50 +1,111 @@
+// import { Block } from "@/types";
+
+// export function flattenAttributes(data: any): any {
+//   if (
+//     typeof data !== "object" ||
+//     data === null ||
+//     data instanceof Date ||
+//     typeof data === "function"
+//   ) {
+//     return data;
+//   }
+
+//   if (Array.isArray(data)) {
+//     return data.map((item) => flattenAttributes(item));
+//   }
+
+//   let flattened: { [key: string]: any } = {};
+
+//   for (let key in data) {
+//     if (!data.hasOwnProperty(key)) continue;
+
+//     if (
+//       (key === "attributes" || key === "data") &&
+//       typeof data[key] === "object" &&
+//       !Array.isArray(data[key])
+//     ) {
+//       Object.assign(flattened, flattenAttributes(data[key]));
+//     } else {
+//       flattened[key] = flattenAttributes(data[key]);
+//     }
+//   }
+
+//   return flattened;
+// }
+
+// export function getStrapiURL() {
+//   return process.env.STRAPI_BASE_URL ?? "http://localhost:1337";
+// }
+
+// export function getStrapiMedia(url: string | null) {
+//   if (url == null) return null;
+//   if (url.startsWith("data:")) return url;
+//   if (url.startsWith("http") || url.startsWith("//")) return url;
+//   return `${getStrapiURL()}${url}`;
+// }
+
+// export function getBlock<T extends Block>(
+//   blocks: Block[],
+//   component: T["__component"]
+// ): T | undefined {
+//   return blocks.find(
+//     (block): block is T => block.__component === component
+//   );
+// }
+
 import { Block } from "@/types";
 
-export function flattenAttributes(data: any): any {
-  // Check if data is a plain object; return as is if not
+type Primitive = string | number | boolean | null | undefined | Date;
+type Flattened<T> = T extends Primitive
+  ? T
+  : T extends (infer U)[]
+  ? Flattened<U>[]
+  : T extends object
+  ? { [K in keyof T]: Flattened<T[K]> }
+  : T;
+
+/**
+ * Recursively flattens Strapi's nested `attributes` and `data` objects.
+ */
+export function flattenAttributes<T>(data: T): Flattened<T> {
   if (
     typeof data !== "object" ||
     data === null ||
     data instanceof Date ||
     typeof data === "function"
   ) {
-    return data;
+    return data as Flattened<T>;
   }
 
-  // If data is an array, apply flattenAttributes to each element and return as array
   if (Array.isArray(data)) {
-    return data.map((item) => flattenAttributes(item));
+    return data.map((item) => flattenAttributes(item)) as Flattened<T>;
   }
 
-  // Initialize an object with an index signature for the flattened structure
-  let flattened: { [key: string]: any } = {};
+  const flattened = {} as Record<string, unknown>;
 
-  // Iterate over each key in the object
-  for (let key in data) {
-    // Skip inherited properties from the prototype chain
-    if (!data.hasOwnProperty(key)) continue;
+  for (const key of Object.keys(data)) {
+    const value = (data as Record<string, unknown>)[key];
 
-    // If the key is 'attributes' or 'data', and its value is an object, merge their contents
     if (
       (key === "attributes" || key === "data") &&
-      typeof data[key] === "object" &&
-      !Array.isArray(data[key])
+      typeof value === "object" &&
+      value !== null &&
+      !Array.isArray(value)
     ) {
-      Object.assign(flattened, flattenAttributes(data[key]));
+      Object.assign(flattened, flattenAttributes(value));
     } else {
-      // For other keys, copy the value, applying flattenAttributes if it's an object
-      flattened[key] = flattenAttributes(data[key]);
+      flattened[key] = flattenAttributes(value);
     }
   }
 
-  return flattened;
+  return flattened as Flattened<T>;
 }
 
-export function getStrapiURL() {
+export function getStrapiURL(): string {
   return process.env.STRAPI_BASE_URL ?? "http://localhost:1337";
 }
 
-export function getStrapiMedia(url: string | null) {
+export function getStrapiMedia(url: string | null): string | null {
   if (url == null) return null;
   if (url.startsWith("data:")) return url;
   if (url.startsWith("http") || url.startsWith("//")) return url;
@@ -55,7 +116,5 @@ export function getBlock<T extends Block>(
   blocks: Block[],
   component: T["__component"]
 ): T | undefined {
-  return blocks.find(
-    (block): block is T => block.__component === component
-  );
+  return blocks.find((block): block is T => block.__component === component);
 }
