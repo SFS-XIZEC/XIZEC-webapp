@@ -65,6 +65,7 @@ const OurTeam: React.FC<{ data: OurteamProp }> = ({ data }) => {
               width={300}
               height={400}
               className="w-full h-[400px] object-cover"
+              unoptimized
             />
 
             <div className="absolute bottom-0 left-0 right-0 backdrop-blur-xl m-5 rounded-[18px] border-[1px] border-white/20 bg-black/30 px-4 py-1">
@@ -88,6 +89,7 @@ const OurTeam: React.FC<{ data: OurteamProp }> = ({ data }) => {
                 width={300}
                 height={400}
                 className="w-full h-[400px] object-cover"
+                unoptimized
               />
 
               <div className="absolute bottom-0 left-0 right-0 backdrop-blur-xl m-5 rounded-[18px] border-[1px] border-white/20 bg-black/30 px-4 py-1">

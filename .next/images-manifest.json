@@ -35,6 +35,16 @@
     "contentDispositionType": "attachment",
     "remotePatterns": [
       {
+        "protocol": "https",
+        "hostname": "^(?:^(?:xizec\\-webapp\\-f1zqb78dn\\-sunfocus\\-projects\\.vercel\\.app)$)$",
+        "pathname": "^(?:\\/uploads(?:\\/(?!\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)|$))$"
+      },
+      {
+        "protocol": "https",
+        "hostname": "^(?:^(?:xizec\\-webapp\\.vercel\\.app)$)$",
+        "pathname": "^(?:\\/uploads(?:\\/(?!\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)|$))$"
+      },
+      {
         "protocol": "http",
         "hostname": "^(?:^(?:localhost)$)$",
         "port": "1337",

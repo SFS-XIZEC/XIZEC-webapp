@@ -27,7 +27,7 @@ export function StrapiImage({
       height={height}
       width={width}
       className={className}
+      unoptimized
     />
   );
 }
-

@@ -51,8 +51,8 @@ const AboutSection: React.FC<{ AboutData: AboutComponent }> = ({
         {AboutData?.statistics.map((stat, index) => (
           <div key={index} className="">
             <div className="flex items-center justify-between h-40">
-              <div className="flex flex-col items-center p-2 lg:px-10 lg:py-3">
-                <div className="text-black text-[54px] md:text-[64px] font-semibold leading-12 md:leading-14">
+              <div className="flex flex-col justify-start h-full p-2 lg:px-10 lg:py-3">
+                <div className="text-black text-center text-[54px] md:text-[64px] font-semibold leading-12 md:leading-14">
                   {stat.value}+
                 </div>
                 <div className="text-[#5C5C5C] text-center text-[12px] sm:text-[14px] md:text-[18px]">

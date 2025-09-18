@@ -12,18 +12,25 @@ const ServiceSection: React.FC<{
   bgWhite?: boolean;
 }> = ({ ServiceData, bgWhite = false }) => {
   const cardRef = useRef<HTMLImageElement>(null);
-  const [isMount, setIsMount] = useState(false);
   const [cardWidth, setcardWidth] = useState(0);
 
   useEffect(() => {
-    setIsMount(true);
-  }, []);
+    if (!cardRef.current) return;
 
-  useEffect(() => {
-    if (cardRef.current && isMount) {
-      setcardWidth(cardRef.current.offsetWidth);
-    }
-  }, [isMount]);
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect) {
+          setcardWidth(entry.contentRect.width);
+        }
+      }
+    });
+
+    observer.observe(cardRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   return (
     <section
       className={`relative ${

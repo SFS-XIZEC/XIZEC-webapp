@@ -18,7 +18,8 @@ const FormComponent: React.FC<{
   textColor?: string;
   isContact?: boolean;
   isModal?: boolean;
-}> = ({ textColor, isContact = false, isModal = false }) => {
+  onClose?: () => void;
+}> = ({ textColor, isContact = false, isModal = false, onClose }) => {
   const [form] = Form.useForm();
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const { message } = App.useApp();
@@ -44,6 +45,7 @@ const FormComponent: React.FC<{
         await submitForm(payload);
         message.success("Form submitted successfully!");
         form.resetFields();
+        onClose?.();
         setCaptchaValue(null);
       } catch (err) {
         console.error(err);
@@ -87,7 +89,7 @@ const FormComponent: React.FC<{
         >
           <Input
             placeholder="Enter your full name"
-            className={`!h-[54px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
+            className={`!h-[46px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
           />
         </Form.Item>
 
@@ -110,7 +112,7 @@ const FormComponent: React.FC<{
         >
           <Input
             placeholder="Enter your business email"
-            className={`!h-[54px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
+            className={`!h-[46px] !py-[10px] px-[16px]  border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
           />
         </Form.Item>
       </div>
@@ -151,7 +153,7 @@ const FormComponent: React.FC<{
             inputStyle={{
               color: "black",
               width: "calc(100% - 60px)",
-              height: "54px",
+              height: "46px",
               borderRadius: "12px",
               border: "1px solid #9A9A9A",
               fontSize: "16px",
@@ -182,7 +184,7 @@ const FormComponent: React.FC<{
       >
         <Input.TextArea
           className={` border !border-[#9A9A9A] !rounded-[12px] !shadow-none `}
-          rows={isModal ? 4 : 6}
+          rows={4}
           placeholder="Describe your project in detail"
         />
       </Form.Item>
@@ -194,7 +196,8 @@ const FormComponent: React.FC<{
 
       <Form.Item className="md:!mb-0">
         <CommonButton
-          text="Submit"
+          text={"Start a Project"}
+          loading={isPending}
           className={`w-full mt-6 ${isModal && "!bg-black !text-white"}`}
         />
       </Form.Item>

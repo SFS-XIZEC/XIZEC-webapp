@@ -102,7 +102,7 @@ export function flattenAttributes<T>(data: T): Flattened<T> {
 }
 
 export function getStrapiURL(): string {
-  return process.env.STRAPI_BASE_URL ?? "http://localhost:1337";
+  return process.env.NEXT_PUBLIC_STRAPI_BASE_URL ?? "";
 }
 
 export function getStrapiMedia(url: string | null): string | null {
@@ -116,5 +116,5 @@ export function getBlock<T extends Block>(
   blocks: Block[],
   component: T["__component"]
 ): T | undefined {
-  return blocks.find((block): block is T => block.__component === component);
+  return blocks?.find((block): block is T => block.__component === component);
 }

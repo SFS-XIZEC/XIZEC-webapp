@@ -8,7 +8,7 @@ const SectionHeading: React.FC<{
   invert?: boolean;
 }> = ({ heading, alignCenter = false, invert = false }) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 font-sans">
       <div
         className={`relative flex flex-col ${
           alignCenter ? "items-center" : ""
@@ -16,7 +16,7 @@ const SectionHeading: React.FC<{
       >
         {/* Background Title */}
         <h4
-          className={`relative font-bold uppercase bg-gradient-to-b from-[#FFC300] ${
+          className={`relative whitespace-nowrap font-bold uppercase bg-gradient-to-b from-[#FFC300] ${
             invert ? "to-black" : "to-white"
           } bg-clip-text text-transparent select-none leading-none
           text-[14vw] md:text-[8vw] lg:text-[8vw]`}

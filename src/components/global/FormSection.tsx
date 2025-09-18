@@ -5,12 +5,14 @@ import FormComponent from "../FormComponent";
 import { usePathname } from "next/navigation";
 import { Contact, FormSection, SocialLink } from "@/types";
 import MaskedIcon from "../MaskedIcon";
+import { getStrapiURL } from "@/lib/utils";
 
 interface FormSectionProp {
   ContactData: Contact[];
   SocialLinks: SocialLink[];
   FormSection: FormSection;
   isModal?: boolean;
+  onClose?: () => void;
 }
 
 const FormSecton: React.FC<FormSectionProp> = ({
@@ -18,15 +20,19 @@ const FormSecton: React.FC<FormSectionProp> = ({
   SocialLinks,
   FormSection,
   isModal = false,
+  onClose,
 }) => {
   const pathname = usePathname();
 
   if (pathname === "/contact" && !isModal) return null;
+  const backgroundImage = FormSection?.image?.url
+    ? `url(${getStrapiURL()}${FormSection.image.url})`
+    : "url('/images/homebg.png')";
   return (
     <div
       className="relative bg-cover bg-no-repeat bg-center font-sans scrollbar-hide"
       style={{
-        backgroundImage: isModal ? "" : "url('/images/formbg.png')",
+        backgroundImage: isModal ? "" : backgroundImage,
       }}
     >
       {!isModal && <div className="absolute inset-0 bg-black/80"></div>}
@@ -112,10 +118,10 @@ const FormSecton: React.FC<FormSectionProp> = ({
           className={`${
             isModal
               ? "lg:w-2/3 px-4 lg:p-8"
-              : "bg-white/10 backdrop-blur-lg rounded-[20px] p-6 lg:p-10"
+              : "bg-white/10 backdrop-blur-xs rounded-[20px] p-4 sm:p-8"
           }`}
         >
-          <FormComponent isModal={isModal} />
+          <FormComponent onClose={onClose} isModal={isModal} />
         </div>
       </div>
     </div>

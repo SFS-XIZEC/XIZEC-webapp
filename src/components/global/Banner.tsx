@@ -5,7 +5,7 @@ import MaskedIcon from "../MaskedIcon";
 
 const Banner: React.FC<{ banner: BannerItem[] }> = ({ banner }) => {
   return (
-    <div className="bg-primary h-12 w-full p-3 lg:px-6 lg:py-3 flex justify-between items-center">
+    <div className="bg-primary md:h-12 w-full p-3 lg:px-6 lg:py-3 flex justify-between items-center">
       {banner?.map((item) => {
         const { id, value, image, type } = item;
 

@@ -52,31 +52,14 @@ export default function Header({ data }: { data: GlobalApi }) {
     : "url('/images/homebg.png')";
 
   return (
-    <div
-      className="relative bg-center h-screen bg-no-repeat lg:bg-cover flex flex-col font-sans"
-      style={{ backgroundImage, opacity: fade }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80 z-0"></div>
-
-      <MenuDrawer
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        pathname={pathname}
-        navLinks={headerData?.NavLink}
-      />
-
-      <GetInTouchModal
-        open={open}
-        onClose={() => setOpen(false)}
-        ContactData={ContactData}
-        FormSection={FormSection}
-        SocialLinks={SocialLinks}
-      />
-
-      <div className="flex flex-col gap-6 justify-between items-center relative z-10">
+    <>
+      <div className="fixed w-full top-0 flex flex-col justify-between items-center z-50">
         <Banner banner={data?.Banner} />
-        <header className="flex justify-between w-full max-lg:px-2 items-center bg-transparent text-white lg:w-[90%]">
+        <header
+          className={`w-full flex justify-between px-2 py-3 items-center lg:px-8 transition-colors duration-300 z-50 ${
+            fade < 1 ? "bg-black/40" : "bg-transparent"
+          }`}
+        >
           <div className="flex gap-3">
             <button
               onClick={() => setDrawerOpen(true)}
@@ -127,26 +110,58 @@ export default function Header({ data }: { data: GlobalApi }) {
         </header>
       </div>
       <div
-        className={`relative z-10 flex flex-col items-center justify-center h-full gap-10 lg:gap-5`}
+        className={`${
+          pathname === "/" ? "h-screen" : "h-[70vh]"
+        } bg-center bg-no-repeat lg:bg-cover flex flex-col font-sans`}
+        style={{ backgroundImage, opacity: fade }}
       >
-        {heroContent && <Heading headingData={heroContent} alingCenter />}
+        {/* Overlay */}
+        <div
+          className={`${
+            pathname === "/" ? "h-screen" : "h-[70vh]"
+          } absolute inset-0 bg-black/80 z-0`}
+        ></div>
 
-        {heroContent?.Button?.text &&
-          (heroContent.Button.href ? (
-            <Link
-              href={heroContent.Button.href}
-              target={heroContent.Button.isExternal ? "_blank" : "_self"}
-            >
-              <CommonButton text={heroContent.Button.text} />
-            </Link>
-          ) : (
-            <CommonButton
-              text={heroContent.Button.text}
-              onClick={() => setOpen(true)}
-            />
-          ))}
+        <MenuDrawer
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          pathname={pathname}
+          navLinks={headerData?.NavLink}
+        />
+
+        {open && (
+          <GetInTouchModal
+            open={open}
+            onClose={() => setOpen(false)}
+            ContactData={ContactData}
+            FormSection={FormSection}
+            SocialLinks={SocialLinks}
+          />
+        )}
+        <div
+          className={`z-10 flex flex-col items-center justify-center ${
+            pathname === "/" ? "pt-30" : ""
+          } h-full gap-10 lg:gap-5`}
+        >
+          {heroContent && <Heading headingData={heroContent} alingCenter />}
+
+          {heroContent?.Button?.text &&
+            (heroContent.Button.href ? (
+              <Link
+                href={heroContent.Button.href}
+                target={heroContent.Button.isExternal ? "_blank" : "_self"}
+              >
+                <CommonButton text={heroContent.Button.text} />
+              </Link>
+            ) : (
+              <CommonButton
+                text={heroContent.Button.text}
+                onClick={() => setOpen(true)}
+              />
+            ))}
+        </div>
+        {pathname === "/" && <ScrollMouse targetId="about" />}
       </div>
-      {pathname === "/" && <ScrollMouse targetId="about" />}
-    </div>
+    </>
   );
 }

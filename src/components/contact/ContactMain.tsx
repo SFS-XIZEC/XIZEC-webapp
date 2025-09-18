@@ -100,6 +100,7 @@ const ContactMain: React.FC<{ data: contactProp }> = ({ data }) => {
                           height={48}
                           alt={testimonial.name}
                           className="object-cover"
+                          unoptimized
                         />
                       ) : (
                         <NoProfilePic />
@@ -117,7 +118,7 @@ const ContactMain: React.FC<{ data: contactProp }> = ({ data }) => {
         </div>
       </div>
 
-      <div className="lg:w-[30%] p-8 rounded-3xl shadow-[0px_4px_26.8px_0px_#0000001A]">
+      <div className="lg:w-[30%] md:p-4 rounded-3xl shadow-[0px_4px_26.8px_0px_#0000001A]">
         <FormComponent textColor="text-black" isContact />
       </div>
     </div>

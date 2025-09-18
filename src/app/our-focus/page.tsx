@@ -61,7 +61,7 @@ export default async function page() {
     <div className="flex flex-col gap-[60px] py-[80px]">
       <OurFocusSection VisionData={VisionData} />
       <ProcessSection StepData={StepData} />
-      <MissionSection MissionData={MissionData} />
+      <MissionSection MissionData={MissionData} marginTop="mt-0" />
       <TestimonialSection
         TestimonialData={TestimonialData}
         Testimonial={Testimonial}

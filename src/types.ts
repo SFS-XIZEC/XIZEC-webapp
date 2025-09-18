@@ -96,6 +96,7 @@ export interface FormSection {
   id: number;
   title: string;
   Description: string;
+  image: Media;
 }
 
 // ========================
@@ -515,4 +516,72 @@ export interface ServicesComponent {
 export interface Faq extends StrapiBaseItem {
   question: string;
   answer: string;
+}
+
+// ========================
+// About Page Response
+// ========================
+export interface AboutPageResponse {
+  data: AboutPageData;
+  meta: Record<string, unknown>;
+}
+
+export interface AboutPageData extends StrapiBaseItem {
+  title: string;
+  blocks: AboutPageBlock[];
+  testimonials: Testimonial[];
+}
+
+// ----------------------
+// Blocks (Dynamic Zone)
+// ----------------------
+export type AboutPageBlock =
+  | AboutComponent // already defined
+  | HistorySectionBlock
+  | LeaderCardBlock
+  | TeamComponentBlock
+  | TestimonialBlock // already defined
+  | ClientComponent; // already defined
+
+// ----------------------
+// New Blocks
+// ----------------------
+
+// History Section
+export interface HistorySectionBlock {
+  __component: "about-page.history-section";
+  id: number;
+  heading: Heading;
+  cards: HistoryCard[];
+  HireCard: HireCardProp;
+}
+
+export interface HistoryCard {
+  id: number;
+  year: string;
+  title: string;
+  description: string;
+}
+
+// Leader Card
+export interface LeaderCardBlock {
+  __component: "about-page.leader-card";
+  id: number;
+  heading: Heading;
+  image: Media;
+}
+
+// Team Component
+export interface TeamComponentBlock {
+  __component: "about-page.team-component";
+  id: number;
+  heading: Heading;
+  ProfileCard: TeamProfile[];
+}
+
+export interface TeamProfile {
+  id: number;
+  name: string;
+  designation: string;
+  image: Media;
 }

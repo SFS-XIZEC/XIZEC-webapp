@@ -37,6 +37,7 @@ const LeaderSection: React.FC<{ data: LeaderData }> = ({ data }) => {
         width={570}
         height={650}
         className=""
+        unoptimized
       />
     </div>
   );

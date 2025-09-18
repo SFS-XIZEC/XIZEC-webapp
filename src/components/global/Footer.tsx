@@ -92,13 +92,15 @@ const Footer: React.FC<FooterProps> = ({
                   target={type === "location" ? "_blank" : undefined}
                   className="flex gap-1 group lg:gap-2 items-center  transition-colors !text-white hover:!text-primary"
                 >
-                  <MaskedIcon
-                    src={image?.url ?? "#"}
-                    size={28}
-                    color="bg-white"
-                    hoverColor="hover:bg-primary"
-                    groupHoverColor="group-hover:bg-primary"
-                  />
+                  <div>
+                    <MaskedIcon
+                      src={image?.url ?? "#"}
+                      size={28}
+                      color="bg-white"
+                      hoverColor="hover:bg-primary"
+                      groupHoverColor="group-hover:bg-primary"
+                    />
+                  </div>
                   <p className="text-[16px]">{value}</p>
                 </Link>
               );
@@ -116,7 +118,7 @@ const Footer: React.FC<FooterProps> = ({
               key={idx}
               href={social.href}
               target={"_blank"}
-              className="bg-gray-800 group p-2 !text-white hover:!text-black rounded-full hover:!bg-yellow-400 transition"
+              className="bg-gray-800 border border-white hover:border-black group p-2 !text-white hover:!text-black rounded-full hover:!bg-yellow-400 transition"
             >
               <MaskedIcon
                 src={social?.icon?.url ?? "#"}

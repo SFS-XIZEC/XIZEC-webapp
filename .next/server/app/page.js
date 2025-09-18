@@ -11,7 +11,7 @@ R.c("server/chunks/ssr/node_modules_next_dist_client_components_builtin_forbidde
 R.c("server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_15817684.js")
 R.c("server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_ece394eb.js")
 R.c("server/chunks/ssr/_48c8e1a0._.js")
-R.c("server/chunks/ssr/[root-of-the-server]__822b08b7._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__f25bf496._.js")
 R.c("server/chunks/ssr/src_common_icons_tsx_8f1cceea._.js")
 R.c("server/chunks/ssr/_030d5992._.js")
 R.c("server/chunks/ssr/_f57231f2._.js")
