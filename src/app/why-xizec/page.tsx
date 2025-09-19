@@ -67,13 +67,13 @@ export default async function WhyXizecPage() {
   if (!faqs) return null;
 
   return (
-    <div className="flex flex-col gap-[60px] py-[80px]">
+    <div className="flex flex-col  gap-[50px] md:gap-[60px] py-[60px] md:py-[80px] ">
       <OurFocusSection VisionData={VisionData} rowReverse />
       <WhyChooseSection WhyChooseData={WhyChooseData} />
       <MakeBetterSection BetterData={BetterData} />
       <IndustorySection IndustryData={IndustryData} />
       <ServiceSection ServiceData={ServiceData} bgWhite />
-      <FrequentlyQuestionSection data={faqs} FaqData={FaqData} />
+      <FrequentlyQuestionSection data={faqs} FaqData={FaqData} margin="mt-0" />
     </div>
   );
 }

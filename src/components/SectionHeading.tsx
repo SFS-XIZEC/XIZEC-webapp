@@ -18,16 +18,16 @@ const SectionHeading: React.FC<{
         <h4
           className={`relative whitespace-nowrap font-bold uppercase bg-gradient-to-b from-[#FFC300] ${
             invert ? "to-black" : "to-white"
-          } bg-clip-text text-transparent select-none leading-none
-          text-[14vw] md:text-[8vw] lg:text-[8vw]`}
+          } bg-clip-text text-transparent select-none leading-none text-[13vw]
+          sm:text-[14vw] md:text-[8vw] lg:text-[8vw]`}
         >
           {heading?.title}
         </h4>
 
         {/* Foreground Subtitle */}
         <h2
-          className={` absolute bottom-0 text-center font-medium leading-tight
-          text-[6vw] md:text-[4vw] lg:text-[3vw] 
+          className={`whitespace-nowrap absolute bottom-0 text-center font-medium leading-tight text-[4vw]
+          sm:text-[6vw] md:text-[4vw] lg:text-[3vw] 
           ${invert ? "text-white" : "text-black"}`}
         >
           {heading?.subtitle}

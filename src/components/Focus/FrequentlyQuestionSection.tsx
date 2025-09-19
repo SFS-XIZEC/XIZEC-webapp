@@ -8,22 +8,41 @@ import { StrapiImage } from "../StrapiImage";
 const FrequentlyQuestionSection: React.FC<{
   data: Faq[];
   FaqData: FaqBlock;
-}> = ({ data, FaqData }) => {
+  margin?: string;
+}> = ({ data, FaqData, margin = "mt-[50px]" }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
   return (
-    <div className="bg-white mt-[50px] flex flex-col gap-16 px-6 md:px-12 lg:px-20">
+    <div
+      className={`bg-white flex flex-col gap-8 sm:gap-10 md:gap-16 px-6 md:px-12 lg:px-20 ${margin}`}
+    >
       <SectionHeading heading={FaqData?.heading} alignCenter />
 
       <div className="relative">
-        <div className="lg:w-[80%] mx-auto flex flex-col gap-6 z-50">
+        <div className="hidden md:block absolute bottom-0 left-0">
+          <StrapiImage
+            src={FaqData?.image.url}
+            alt={FaqData?.image.name}
+            width={200}
+            height={400}
+          />
+        </div>
+        <div className="hidden md:block absolute top-0 right-0">
+          <StrapiImage
+            src={FaqData?.image.url}
+            alt={FaqData?.image.name}
+            width={200}
+            height={400}
+          />
+        </div>
+        <div className="lg:w-[80%] mx-auto flex flex-col gap-6 z-40">
           {data?.map((faq, index) => (
             <div
               key={index}
-              className="border-b border-gray-300 pb-4 cursor-pointer z-50 "
+              className="border-b border-gray-300 pb-4 cursor-pointer z-40 "
             >
               <div
                 className="flex justify-between items-center"
@@ -50,22 +69,6 @@ const FrequentlyQuestionSection: React.FC<{
               </div>
             </div>
           ))}
-        </div>
-        <div className="hidden md:block absolute bottom-0 left-0">
-          <StrapiImage
-            src={FaqData?.image.url}
-            alt={FaqData?.image.name}
-            width={200}
-            height={400}
-          />
-        </div>
-        <div className="hidden md:block absolute top-0 right-0">
-          <StrapiImage
-            src={FaqData?.image.url}
-            alt={FaqData?.image.name}
-            width={200}
-            height={400}
-          />
         </div>
       </div>
     </div>

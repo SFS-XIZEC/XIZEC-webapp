@@ -72,7 +72,7 @@ const FormComponent: React.FC<{
           name="fullName"
           label={
             <span
-              className={`${
+              className={`!font-sans ${
                 isModal ? "text-black" : textColor || "text-white"
               }`}
             >
@@ -98,7 +98,7 @@ const FormComponent: React.FC<{
           name="email"
           label={
             <span
-              className={`${
+              className={`!font-sans ${
                 isModal ? "text-black" : textColor || "text-white"
               }`}
             >
@@ -121,7 +121,9 @@ const FormComponent: React.FC<{
         name={"phone"}
         label={
           <span
-            className={`${isModal ? "text-black" : textColor || "text-white"}`}
+            className={`!font-sans ${
+              isModal ? "text-black" : textColor || "text-white"
+            }`}
           >
             Mobile Number
           </span>
@@ -138,7 +140,8 @@ const FormComponent: React.FC<{
                   return Promise.resolve();
                 }
                 return Promise.reject("Please enter a valid phone number!");
-              } catch (err) {
+              } catch (error) {
+                console.log(error);
                 return Promise.reject("Invalid phone number format!");
               }
             },
@@ -169,7 +172,9 @@ const FormComponent: React.FC<{
         name="projectDetails"
         label={
           <span
-            className={`${isModal ? "text-black" : textColor || "text-white"}`}
+            className={`!font-sans ${
+              isModal ? "text-black" : textColor || "text-white"
+            }`}
           >
             Project Details
           </span>

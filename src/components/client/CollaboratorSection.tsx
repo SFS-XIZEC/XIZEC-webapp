@@ -7,7 +7,7 @@ const CollaboratorSection: React.FC<{ CollaboraterData: ClientComponent }> = ({
   CollaboraterData,
 }) => {
   return (
-    <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
+    <div className="bg-white flex flex-col gap-6 sm:gap-10 md:gap-16 px-6 md:px-12 lg:px-20">
       <SectionHeading heading={CollaboraterData?.heading} alignCenter />
       <ClientSection ClientsData={CollaboraterData?.images} />
     </div>

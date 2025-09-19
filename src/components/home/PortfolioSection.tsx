@@ -63,7 +63,6 @@ import React, { useState } from "react";
 import SectionHeading from "../SectionHeading";
 import CommonButton from "../CommonButton";
 import { PortfolioComponent } from "@/types";
-import Link from "next/link";
 import { StrapiImage } from "../StrapiImage";
 
 const PortfolioSection: React.FC<{
@@ -78,7 +77,7 @@ const PortfolioSection: React.FC<{
 
   return (
     <div
-      className={`${margin} px-6 md:px-12 lg:px-20 flex flex-col items-center gap-[50px]`}
+      className={`${margin} px-6 md:px-12 lg:px-20 flex flex-col items-center gap-[30px] md:gap-[50px]`}
     >
       <SectionHeading alignCenter heading={PortfolioData?.heading} />
 

@@ -39,7 +39,7 @@ const MissionSection: React.FC<{
       >
         <div className="flex flex-col justify-between gap-3">
           <SectionHeading invert heading={MissionData?.heading} />
-          <div className="rounded-lg overflow-hidden">
+          <div className="rounded-lg overflow-hidden w-full">
             <StrapiImage
               src={MissionData.image1.url}
               alt={MissionData.image1.name}

@@ -1,26 +1,11 @@
 import React from "react";
 import SectionHeading from "../SectionHeading";
 import { Carousel } from "antd";
-import Image from "next/image";
+import { ClientComponent } from "@/types";
+import { StrapiImage } from "../StrapiImage";
 
-export interface CollaboratorHeading {
-  title: string;
-  subtitle: string;
-}
-
-export interface CollaboratorClient {
-  url: string;
-  alternativeText: string;
-  name: string;
-}
-
-export interface CollaboratorData {
-  heading: CollaboratorHeading;
-  client: CollaboratorClient[];
-}
-
-const ContactCollaborator: React.FC<{ data: CollaboratorData }> = ({
-  data,
+const ContactCollaborator: React.FC<{ CollaboraterData: ClientComponent }> = ({
+  CollaboraterData,
 }) => {
   const settings1 = {
     dots: false,
@@ -81,25 +66,22 @@ const ContactCollaborator: React.FC<{ data: CollaboratorData }> = ({
     ],
   };
   return (
-    <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
-      <div className="lg:w-[70%] mx-auto flex text-center">
-        {/* <SectionHeading heading={data?.heading} alignCenter /> */}
-      </div>
+    <div className="bg-white flex flex-col gap-6 sm:gap-10 md:gap-16 px-6 md:px-12 lg:px-20">
+      <SectionHeading heading={CollaboraterData?.heading} alignCenter />
       <div className="flex flex-col gap-8">
         <Carousel prefixCls="custom-dots" {...settings1}>
-          {data?.client.map((item, index) => (
+          {CollaboraterData?.images.map((item, index) => (
             <div key={index} className="flex justify-center">
               <div
                 key={index}
                 className="mr-8 flex justify-center px-[40px] py-[20px] rounded-[20px] border-[1px] border-[#EAEAEA]"
               >
-                <Image
+                <StrapiImage
                   src={item?.url}
                   alt={item?.name}
                   width={200}
                   height={80}
                   className="!w-[200px] !h-[80px]"
-                  unoptimized
                 />
               </div>
             </div>
@@ -107,19 +89,18 @@ const ContactCollaborator: React.FC<{ data: CollaboratorData }> = ({
         </Carousel>
 
         <Carousel prefixCls="custom-dots" {...settings2}>
-          {data?.client.map((image, index) => (
+          {CollaboraterData?.images.map((image, index) => (
             <div key={index} className="flex justify-center ">
               <div
                 key={index}
                 className="mr-8 flex justify-center px-[40px] py-[20px] rounded-[20px] border-[2px] border-[#EAEAEA]"
               >
-                <Image
+                <StrapiImage
                   src={image?.url}
                   alt={image?.name}
                   width={200}
                   height={80}
                   className="!w-[200px] !h-[80px]"
-                  unoptimized
                 />
               </div>
             </div>

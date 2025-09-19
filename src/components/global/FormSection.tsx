@@ -115,7 +115,7 @@ const FormSecton: React.FC<FormSectionProp> = ({
         </div>
 
         <div
-          className={`${
+          className={`font-sans ${
             isModal
               ? "lg:w-2/3 px-4 lg:p-8"
               : "bg-white/10 backdrop-blur-xs rounded-[20px] p-4 sm:p-8"

@@ -184,7 +184,12 @@ export type Block =
   | PortfolioComponent
   | TestimonialBlock
   | BetterSectionBlock
-  | IndustoryComponentBlock;
+  | IndustoryComponentBlock
+  | HistorySectionBlock
+  | LeaderCardBlock
+  | TeamComponentBlock
+  | ContactFormBlock
+  | MapBlock;
 
 // About Section
 export interface AboutComponent {
@@ -584,4 +589,47 @@ export interface TeamProfile {
   name: string;
   designation: string;
   image: Media;
+}
+
+// ========================
+// Contact Page Response
+// ========================
+
+export interface ContactPageResponse {
+  data: ContactPageData;
+  meta: Record<string, unknown>;
+}
+
+export interface ContactPageData extends StrapiBaseItem {
+  title: string;
+  blocks: ContactBlock[];
+  testimonials: Testimonial[];
+  faqs: Faq[];
+  contacts: Contact[];
+  socialLinks: SocialLink[];
+}
+
+// ----------------------
+// Blocks (Dynamic Zone)
+// ----------------------
+export type ContactBlock =
+  | ClientComponent // already defined
+  | ContactFormBlock
+  | MapBlock
+  | FaqBlock; // already defined
+
+// Contact Form Component
+export interface ContactFormBlock {
+  __component: "contact.contact-form-component";
+  id: number;
+  title: string;
+  description: string;
+}
+
+// Map Component
+export interface MapBlock {
+  __component: "contact.map-component";
+  id: number;
+  title: string;
+  subtitle: string;
 }

@@ -11,7 +11,7 @@ import { App } from "antd";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
-  variable: "--font-work-sans", // expose as a CSS variable
+  variable: "--font-work-sans", 
 });
 
 export const metadata: Metadata = {

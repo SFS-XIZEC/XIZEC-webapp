@@ -3,61 +3,45 @@ import React, { useEffect, useRef, useState } from "react";
 import SectionHeading from "../SectionHeading";
 import HireCard from "../HireCard";
 import { Timeline } from "antd";
-import { Heading } from "@/types";
+import { HistorySectionBlock } from "@/types";
 
-export type TimelineItem = {
-  year: string;
-  title: string;
-  description: string;
-};
-
-export type HistoryHeading = {
-  subtitle: string;
-  title: string;
-  description: string;
-};
-
-export type HistoryCTA = {
-  title: string;
-  subtitle: string;
-};
-
-export type HistoryData = {
-  heading: Heading;
-  timelineData: TimelineItem[];
-  cta: HistoryCTA;
-};
-
-const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
+const HistorySection: React.FC<{ HistoryData: HistorySectionBlock }> = ({
+  HistoryData,
+}) => {
   const cardRef = useRef<HTMLImageElement>(null);
-  const [isMount, setIsMount] = useState(false);
   const [cardWidth, setcardWidth] = useState(0);
 
   useEffect(() => {
-    setIsMount(true);
-  }, []);
+    if (!cardRef.current) return;
 
-  useEffect(() => {
-    if (cardRef.current && isMount) {
-      setcardWidth(cardRef.current.offsetWidth);
-    }
-  }, [isMount]);
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect) {
+          setcardWidth(entry.contentRect.width);
+        }
+      }
+    });
+
+    observer.observe(cardRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   return (
     <div
-      className={`relative bg-black text-white pt-20 pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
+      className={`relative bg-black text-white pt-10 md:pt-20 pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col items-center gap-[30px] md:gap-[50px]`}
     >
-      <div className="lg:w-[70%] mx-auto">
-        <SectionHeading invert alignCenter heading={data.heading} />
-      </div>
+      <SectionHeading invert alignCenter heading={HistoryData?.heading} />
 
       <div
         ref={cardRef}
-        className="bg-black py-12 px-4 md:px-20 custom-timeline"
+        className="bg-black md:py-12 px-4 md:px-20 custom-timeline"
       >
         <Timeline
-          className="hidden lg:block"
+          className="hidden md:block"
           mode="alternate"
-          items={data?.timelineData.map((item, index) => ({
+          items={HistoryData?.cards?.map((item, index) => ({
             dot: <div className="w-8 h-8 bg-primary rounded-full"></div>,
             children: (
               <div className="relative bg-[#2D2D2D] p-4 rounded-[12px] text-start gap-2">
@@ -83,8 +67,8 @@ const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
           }))}
         />
 
-        <div className="flex flex-col">
-          {data?.timelineData.map((item, index) => (
+        <div className="md:hidden flex flex-col">
+          {HistoryData?.cards?.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
               <div className="relative bg-[#2D2D2D] p-4 rounded-[12px] text-start gap-2">
                 <h3 className="text-white text-lg font-bold">{item.year}</h3>
@@ -95,7 +79,7 @@ const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
                   <p className="text-gray-300 text-sm">{item.description}</p>
                 </div>
               </div>
-              {index < data?.timelineData?.length-1 && (
+              {index < HistoryData?.cards?.length - 1 && (
                 <div className="w-1 border-dashed h-20 border-l-2 border-[#6B6B6B]"></div>
               )}
             </div>
@@ -103,11 +87,11 @@ const HistorySection: React.FC<{ data: HistoryData }> = ({ data }) => {
         </div>
       </div>
 
-      {/* <HireCard
+      <HireCard
         className="absolute -bottom-[100px]"
         cardWidth={cardWidth}
-        data={data?.cta}
-      /> */}
+        data={HistoryData?.HireCard}
+      />
     </div>
   );
 };

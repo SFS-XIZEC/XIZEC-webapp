@@ -3,43 +3,43 @@
     "4046c0ce93b8e90a0f725698a09dee94f6d2bf00ce": {
       "workers": {
         "app/_not-found/page": {
-          "moduleId": "93980",
+          "moduleId": "[project]/.next-internal/server/app/_not-found/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/about/page": {
-          "moduleId": "34707",
+          "moduleId": "[project]/.next-internal/server/app/about/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/clients/page": {
-          "moduleId": "40468",
+          "moduleId": "[project]/.next-internal/server/app/clients/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/contact/page": {
-          "moduleId": "25023",
+          "moduleId": "[project]/.next-internal/server/app/contact/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/our-focus/page": {
-          "moduleId": "93688",
+          "moduleId": "[project]/.next-internal/server/app/our-focus/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/page": {
-          "moduleId": "9218",
+          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/why-xizec/page": {
-          "moduleId": "36666",
+          "moduleId": "[project]/.next-internal/server/app/why-xizec/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"

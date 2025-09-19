@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import CommonButton from "../CommonButton";
-import { DrawerIcon, MouseIcon } from "@/common/icons";
+import { DrawerIcon } from "@/common/icons";
 import Banner from "./Banner";
 import Heading from "../Heading";
 import { usePathname } from "next/navigation";
@@ -57,7 +57,7 @@ export default function Header({ data }: { data: GlobalApi }) {
         <Banner banner={data?.Banner} />
         <header
           className={`w-full flex justify-between px-2 py-3 items-center lg:px-8 transition-colors duration-300 z-50 ${
-            fade < 1 ? "bg-black/40" : "bg-transparent"
+            fade < 1 ? "bg-black/40 backdrop-blur-sm" : "bg-transparent"
           }`}
         >
           <div className="flex gap-3">
@@ -67,13 +67,15 @@ export default function Header({ data }: { data: GlobalApi }) {
             >
               <DrawerIcon />
             </button>
-            <StrapiImage
-              src={headerData?.MainLogo?.image?.url}
-              width={172}
-              height={48}
-              className="object-cover"
-              alt={headerData?.MainLogo?.image?.name}
-            />
+            <Link href={headerData?.MainLogo?.href}>
+              <StrapiImage
+                src={headerData?.MainLogo?.image?.url}
+                width={172}
+                height={48}
+                className="object-cover"
+                alt={headerData?.MainLogo?.image?.name}
+              />
+            </Link>
           </div>
 
           {/* Nav */}
@@ -111,15 +113,15 @@ export default function Header({ data }: { data: GlobalApi }) {
       </div>
       <div
         className={`${
-          pathname === "/" ? "h-screen" : "h-[70vh]"
+          pathname === "/" ? "h-screen" : "h-[50vh] md:min-h-[70vh]"
         } bg-center bg-no-repeat lg:bg-cover flex flex-col font-sans`}
         style={{ backgroundImage, opacity: fade }}
       >
         {/* Overlay */}
         <div
           className={`${
-            pathname === "/" ? "h-screen" : "h-[70vh]"
-          } absolute inset-0 bg-black/80 z-0`}
+            pathname === "/" ? "h-screen" : "h-[50vh] md:min-h-[70vh]"
+          } absolute inset-0 bg-black/80  z-0`}
         ></div>
 
         <MenuDrawer
@@ -140,7 +142,7 @@ export default function Header({ data }: { data: GlobalApi }) {
         )}
         <div
           className={`z-10 flex flex-col items-center justify-center ${
-            pathname === "/" ? "pt-30" : ""
+            pathname === "/" ? "pt-30" : "max-md:pt-20"
           } h-full gap-10 lg:gap-5`}
         >
           {heroContent && <Heading headingData={heroContent} alingCenter />}

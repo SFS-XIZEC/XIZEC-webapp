@@ -1,4 +1,4 @@
-import { ClientComponent, Media } from "@/types";
+import { Media } from "@/types";
 import { Carousel } from "antd";
 import React from "react";
 import { StrapiImage } from "../StrapiImage";

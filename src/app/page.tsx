@@ -67,7 +67,7 @@ export default async function Home() {
   if (!TestimonialData) return null;
   if (!Testimonial) return null;
   return (
-    <div className="flex flex-col gap-[60px] py-[80px] ">
+    <div className="flex flex-col gap-[50px] md:gap-[60px] py-[60px] md:py-[80px] ">
       <AboutSection AboutData={AboutData} />
       <WhyChooseSection WhyChooseData={WhyChooseData} />
       <ServiceSection ServiceData={ServiceData} />

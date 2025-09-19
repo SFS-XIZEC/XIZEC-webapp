@@ -95,7 +95,7 @@ const Footer: React.FC<FooterProps> = ({
                   <div>
                     <MaskedIcon
                       src={image?.url ?? "#"}
-                      size={28}
+                      size={24}
                       color="bg-white"
                       hoverColor="hover:bg-primary"
                       groupHoverColor="group-hover:bg-primary"
@@ -122,7 +122,7 @@ const Footer: React.FC<FooterProps> = ({
             >
               <MaskedIcon
                 src={social?.icon?.url ?? "#"}
-                size={28}
+                size={24}
                 color="bg-white"
                 groupHoverColor="group-hover:bg-black"
               />

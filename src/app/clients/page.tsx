@@ -29,7 +29,6 @@ export default async function page() {
   const data = (await loader()) as ClientsData;
   if (!data) return null;
 
-  console.log(data);
   const CollaboraterData = getBlock<ClientComponent>(
     data?.blocks,
     "landing-page.client-component"
@@ -52,11 +51,12 @@ export default async function page() {
   if (!TestimonialData) return null;
   if (!Testimonial) return null;
   return (
-    <div className="flex flex-col gap-[80px] pt-[80px] pb-[120px]">
+    <div className="flex flex-col gap-[50px] md:gap-[60px] py-[60px] md:py-[80px] ">
       <CollaboratorSection CollaboraterData={CollaboraterData} />
       <HireCard className="w-[80%] mx-auto" data={HireData} />
       <PortfolioSection margin="mt-0" PortfolioData={PortfolioData} />
       <TestimonialSection
+         margin="mb-10 md:mb-20"
         TestimonialData={TestimonialData}
         Testimonial={Testimonial}
       />

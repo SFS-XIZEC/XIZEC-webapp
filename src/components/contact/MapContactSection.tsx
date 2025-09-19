@@ -1,32 +1,13 @@
-import Image from "next/image";
+import { Contact, MapBlock, SocialLink } from "@/types";
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React from "react";
+import MaskedIcon from "../MaskedIcon";
 
-interface ContactItem {
-  text: string;
-  icon: ReactNode;
-  type: string;
-}
-
-interface SocialLink {
-  href: string;
-  icon: ReactNode;
-  isExternal?: boolean;
-}
-
-interface MapSectionProp {
-  title: string;
-  subtitle: string;
-  mapImg: {
-    url: string;
-    name: string;
-    alternativeText: string;
-  };
-  cols3: ContactItem[];
+const MapContactSection: React.FC<{
+  MapData: MapBlock;
   socialLinks: SocialLink[];
-}
-
-const MapContactSection: React.FC<{ data: MapSectionProp }> = ({ data }) => {
+  contacts: Contact[];
+}> = ({ MapData, contacts, socialLinks }) => {
   return (
     <div className="lg:relative px-6 md:px-12 lg:px-20 ">
       {/* <Image
@@ -44,39 +25,67 @@ const MapContactSection: React.FC<{ data: MapSectionProp }> = ({ data }) => {
         height="450"
         loading="lazy"
       ></iframe>
-      <div className="mt-6 lg:mt-0 border-[1px] lg:border-none border-[#EAEAEA] flex flex-col justify-between lg:absolute lg:right-30 rounded-xl lg:rounded-t-[12px] lg:bottom-0 p-4 lg:p-8 bg-white lg:w-[400px] ">
+      <div className="mt-6 lg:mt-0 border-[1px] lg:border-none border-[#EAEAEA] flex flex-col justify-between lg:absolute lg:right-30 rounded-t-xl lg:rounded-t-[12px] lg:bottom-0 p-4 lg:p-8 bg-white lg:w-[400px] ">
         <div className="flex flex-col gap-4 items-start">
           <h1 className="font-semibold text-[32px] lg:text-[48px] leading-[120%]">
-            {data?.title}
+            {MapData?.title}
           </h1>
-          <p className="text-[16px] leading-[150%]">{data?.subtitle}</p>
+          <p className="text-[16px] leading-[150%]">{MapData?.subtitle}</p>
         </div>
 
         <div className="flex flex-col gap-3 items-start">
           <div className="flex flex-col gap-3">
             <h3 className="text-white text-2xl font-semibold">Contact</h3>
             <ul className="space-y-3">
-              {data?.cols3.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-3">
-                  <span className="bg-primary text-black w-[32px] h-[32px] rounded-[4px] flex items-center justify-center">
-                    {item?.icon}
-                  </span>
-                  <span>{item.text}</span>
-                </li>
-              ))}
+              {contacts?.map((item) => {
+                const { id, value, image, type } = item;
+
+                let linkHref = "#";
+                if (type === "email") linkHref = `mailto:${value}`;
+                if (type === "phone") {
+                  const phoneNumber = value.replace(/\D/g, "");
+                  linkHref = `tel:${phoneNumber}`;
+                }
+                if (type === "location")
+                  linkHref = `https://www.google.com/maps/search/?api=1&query=${value}`;
+                return (
+                  <Link
+                    href={linkHref}
+                    key={id}
+                    target={type === "location" ? "_blank" : undefined}
+                    className="flex gap-1 group lg:gap-2 items-center  transition-colors !text-black hover:!text-primary"
+                  >
+                    <div className="bg-primary rounded-[4px] w-8 h-8 flex items-center justify-center">
+                      <MaskedIcon
+                        src={image?.url ?? "#"}
+                        size={24}
+                        color="bg-black"
+                        hoverColor="hover:bg-black"
+                        groupHoverColor="group-hover:bg-black"
+                      />
+                    </div>
+                    <p className="text-[16px]">{value}</p>
+                  </Link>
+                );
+              })}
             </ul>
           </div>
 
           <div className="flex items-center gap-3">
-            {data?.socialLinks.map((social, idx) => (
+            {socialLinks?.map((social, idx) => (
               <Link
                 key={idx}
                 href={social.href}
-                target={social.isExternal ? "_blank" : "_self"}
-                rel={social.isExternal ? "noopener noreferrer" : ""}
-                className="bg-black text-white hover:text-black rounded-full hover:bg-yellow-400 transition"
+                target={"_blank"}
+                className="!bg-black group rounded-full hover:!bg-yellow-400 transition w-10 h-10 flex items-center justify-center"
               >
-                {social.icon}
+                <MaskedIcon
+                  src={social?.icon?.url ?? "#"}
+                  size={24}
+                  color="bg-white"
+                  hoverColor="hover:bg-black"
+                  groupHoverColor="group-hover:bg-black"
+                />
               </Link>
             ))}
           </div>

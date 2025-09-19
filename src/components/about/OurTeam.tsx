@@ -1,26 +1,13 @@
 import React from "react";
 import SectionHeading from "../SectionHeading";
-import Image from "next/image";
 import { Carousel } from "antd";
+import { TeamComponentBlock } from "@/types";
+import { StrapiImage } from "../StrapiImage";
 
-interface OurteamProp {
-  heading: {
-    subtitle: string;
-    title: string;
-    description: string;
-  };
-  team: {
-    image: {
-      url: string;
-      alternativeText: string;
-      name: string;
-    };
-    name: string;
-    designation: string;
-  }[];
-}
-
-const OurTeam: React.FC<{ data: OurteamProp }> = ({ data }) => {
+const OurTeam: React.FC<{ TeamData: TeamComponentBlock; margin?: string }> = ({
+  TeamData,
+  margin,
+}) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -50,22 +37,23 @@ const OurTeam: React.FC<{ data: OurteamProp }> = ({ data }) => {
     ],
   };
   return (
-    <div className="bg-white flex flex-col gap-16 px-6 md:px-12 lg:px-20">
-      {/* <SectionHeading heading={data?.heading} alignCenter /> */}
+    <div
+      className={`bg-white flex flex-col gap-6 sm:gap-10 md:gap-16 px-6 md:px-12 lg:px-20 ${margin}`}
+    >
+      <SectionHeading heading={TeamData?.heading} alignCenter />
 
       <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-        {data?.team.map((item, index) => (
+        {TeamData?.ProfileCard?.map((item, index) => (
           <div
             key={index}
             className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
-            <Image
+            <StrapiImage
               src={item.image.url}
-              alt={item.image.alternativeText}
+              alt={item.image.name}
               width={300}
               height={400}
               className="w-full h-[400px] object-cover"
-              unoptimized
             />
 
             <div className="absolute bottom-0 left-0 right-0 backdrop-blur-xl m-5 rounded-[18px] border-[1px] border-white/20 bg-black/30 px-4 py-1">
@@ -78,18 +66,17 @@ const OurTeam: React.FC<{ data: OurteamProp }> = ({ data }) => {
 
       <div className="lg:hidden w-full">
         <Carousel prefixCls="custom-dots" {...settings}>
-          {data?.team.map((item, index) => (
+          {TeamData?.ProfileCard?.map((item, index) => (
             <div
               key={index}
               className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
-              <Image
+              <StrapiImage
                 src={item.image.url}
-                alt={item.image.alternativeText}
+                alt={item.image.name}
                 width={300}
                 height={400}
                 className="w-full h-[400px] object-cover"
-                unoptimized
               />
 
               <div className="absolute bottom-0 left-0 right-0 backdrop-blur-xl m-5 rounded-[18px] border-[1px] border-white/20 bg-black/30 px-4 py-1">

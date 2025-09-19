@@ -1,4 +1,3 @@
-import Image from "next/image";
 import CommonButton from "../CommonButton";
 import SectionHeading from "../SectionHeading";
 import { OurVisionBlock } from "@/types";

@@ -1,7 +1,6 @@
 import React from "react";
 import SectionHeading from "../SectionHeading";
 import { Carousel, Rate } from "antd";
-import Image from "next/image";
 import { NoProfilePic } from "@/common/icons";
 import { Testimonial, TestimonialBlock } from "@/types";
 import ReactMarkdown from "react-markdown";
@@ -10,7 +9,8 @@ import { StrapiImage } from "../StrapiImage";
 const TestimonialSection: React.FC<{
   TestimonialData: TestimonialBlock;
   Testimonial: Testimonial[];
-}> = ({ TestimonialData, Testimonial }) => {
+  margin?: string;
+}> = ({ TestimonialData, Testimonial, margin }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -41,10 +41,8 @@ const TestimonialSection: React.FC<{
   };
 
   return (
-    <div className="flex flex-col gap-[60px] ">
-      <div className="lg:w-[70%] mx-auto">
-        <SectionHeading alignCenter heading={TestimonialData?.heading} />
-      </div>
+    <div className={`flex flex-col gap-[30px] md:gap-[50px] ${margin}`}>
+      <SectionHeading alignCenter heading={TestimonialData?.heading} />
 
       <div className="w-full">
         <Carousel prefixCls="custom-dots" {...settings}>

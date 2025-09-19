@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import SectionHeading from "../SectionHeading";
 import HireCard from "../HireCard";
 import { ServicesComponent } from "@/types";
@@ -34,16 +33,14 @@ const ServiceSection: React.FC<{
   return (
     <section
       className={`relative ${
-        bgWhite ? "bg-white text-black" : "bg-black text-white pt-20 pb-[180px]"
-      } px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
+        bgWhite ? "bg-white text-black" : "bg-black text-white pt-10 md:pt-20 pb-[180px]"
+      } px-6 md:px-12 lg:px-20 flex flex-col gap-[30px] md:gap-[50px]`}
     >
-      <div className="lg:w-[70%] mx-auto">
-        <SectionHeading
-          invert={!bgWhite}
-          alignCenter
-          heading={ServiceData?.heading}
-        />
-      </div>
+      <SectionHeading
+        invert={!bgWhite}
+        alignCenter
+        heading={ServiceData?.heading}
+      />
 
       <div ref={cardRef} className="grid lg:grid-cols-2 lg:items-center gap-12">
         <div className="flex flex-col">

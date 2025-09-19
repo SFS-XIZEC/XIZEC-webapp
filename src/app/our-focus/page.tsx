@@ -58,7 +58,7 @@ export default async function page() {
   if (!faqs) return null;
 
   return (
-    <div className="flex flex-col gap-[60px] py-[80px]">
+    <div className="flex flex-col  gap-[50px] md:gap-[60px] py-[60px] md:py-[80px] ">
       <OurFocusSection VisionData={VisionData} />
       <ProcessSection StepData={StepData} />
       <MissionSection MissionData={MissionData} marginTop="mt-0" />
