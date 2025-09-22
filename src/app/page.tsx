@@ -10,27 +10,58 @@ import {
   ClientComponent,
   LandingPageData,
   PortfolioComponent,
+  SeoComponent,
   ServicesComponent,
   TestimonialBlock,
   WhyChooseComponent,
 } from "@/types";
+import { Metadata } from "next";
+import { cache } from "react";
 
-async function loader() {
+const fetchLandingPage = cache(async (): Promise<LandingPageData> => {
   const { fetchData } = await import("@/lib/api");
-
   const path = "/api/landing-page";
-
   const baseUrl = getStrapiURL();
-
   const url = new URL(path, baseUrl);
+  return fetchData(url.href);
+});
 
-  const data = await fetchData(url.href);
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await fetchLandingPage();
 
-  return data;
+  const seoBlock = getBlock<SeoComponent>(data?.blocks, "shared.seo");
+
+  if (!seoBlock) {
+    return {
+      title: "Xizec-The X factor in IT Consulting",
+      description: "IT Consulting Service",
+    };
+  }
+
+  return {
+    title: seoBlock.metaTitle,
+    description: seoBlock.metaDescription,
+    keywords: seoBlock.keywords,
+    openGraph: {
+      title: seoBlock.metaTitle,
+      description: seoBlock.metaDescription,
+      images: seoBlock.metaImage
+        ? [
+            {
+              url: seoBlock?.metaImage.url,
+              alt: seoBlock.metaImage.alternativeText || seoBlock.metaTitle,
+            },
+          ]
+        : [],
+    },
+    alternates: {
+      canonical: seoBlock.canonicalURL,
+    },
+  };
 }
 
 export default async function Home() {
-  const data = (await loader()) as LandingPageData;
+  const data = (await fetchLandingPage()) as LandingPageData;
   if (!data) return null;
 
   const AboutData = getBlock<AboutComponent>(

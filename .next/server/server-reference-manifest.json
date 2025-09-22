@@ -3,25 +3,43 @@
     "4046c0ce93b8e90a0f725698a09dee94f6d2bf00ce": {
       "workers": {
         "app/_not-found/page": {
-          "moduleId": "[project]/.next-internal/server/app/_not-found/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "93980",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/about/page": {
+          "moduleId": "34707",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/clients/page": {
-          "moduleId": "[project]/.next-internal/server/app/clients/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "40468",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/contact/page": {
+          "moduleId": "25023",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/our-focus/page": {
-          "moduleId": "[project]/.next-internal/server/app/our-focus/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "93688",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
         },
         "app/page": {
-          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/action/submitForm.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "9218",
+          "async": false,
+          "exportedName": "submitForm",
+          "filename": "src/action/submitForm.ts"
+        },
+        "app/why-xizec/page": {
+          "moduleId": "36666",
           "async": false,
           "exportedName": "submitForm",
           "filename": "src/action/submitForm.ts"
@@ -29,9 +47,12 @@
       },
       "layer": {
         "app/_not-found/page": "action-browser",
+        "app/about/page": "action-browser",
         "app/clients/page": "action-browser",
+        "app/contact/page": "action-browser",
         "app/our-focus/page": "action-browser",
-        "app/page": "action-browser"
+        "app/page": "action-browser",
+        "app/why-xizec/page": "action-browser"
       },
       "filename": "src/action/submitForm.ts",
       "exportedName": "submitForm"

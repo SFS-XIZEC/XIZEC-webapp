@@ -15,6 +15,24 @@ export type StrapiBaseItem = {
   locale: string | null;
 };
 
+export interface SeoComponent {
+  __component: "shared.seo";
+  id: number;
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string;
+  canonicalURL?: string;
+  metaImage?: {
+    id: number;
+    url: string;
+    name: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+  };
+}
+
 // ========================
 // Media (Image) type
 // ========================
@@ -181,6 +199,7 @@ export type Block =
   | OurMissionBlock
   | TestimonialBlock
   | FaqBlock
+  | SeoComponent
   | HireCardBlock
   | PortfolioComponent
   | TestimonialBlock
