@@ -19,13 +19,13 @@ const OurFocusSection: React.FC<OurFocusProps> = ({
         rowReverse && "lg:flex-row-reverse flex-col-reverse"
       } flex flex-col lg:flex-row gap-6 lg:gap-12 items-center bg-white px-6 md:px-12 lg:px-20`}
     >
-      <div className="lg:w-[50%] flex gap-5 justify-center lg:justify-start">
+      <div className="w-full lg:w-[50%] flex gap-5 justify-center lg:justify-start">
         <StrapiImage
           src={VisionData?.image.url}
           alt={VisionData?.image.name}
           width={617}
           height={600}
-          className=""
+          className="w-full lg:w-[617px]"
         />
       </div>
 

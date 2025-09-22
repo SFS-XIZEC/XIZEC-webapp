@@ -16,7 +16,7 @@ const LeaderSection: React.FC<{ LeaderData: LeaderCardBlock }> = ({
         alt={LeaderData?.image?.name}
         width={570}
         height={650}
-        className=""
+        className="w-full lg:w-[570px]"
       />
     </div>
   );

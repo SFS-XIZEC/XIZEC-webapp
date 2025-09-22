@@ -25,14 +25,6 @@ const Banner: React.FC<{ banner: BannerItem[] }> = ({ banner }) => {
             target={type === "location" ? "_blank" : undefined}
             className="flex gap-1 lg:gap-2 items-center  transition-colors"
           >
-            {/* <StrapiImage
-              src={image?.url}
-              width={24}
-              height={24}
-              className="object-cover"
-              alt={image?.alternativeText || "Hero Icon"}
-            /> */}
-
             <MaskedIcon src={image?.url} size={24} />
             <p className="text-black text-[14px] sm:text-[16px]">{value}</p>
           </Link>

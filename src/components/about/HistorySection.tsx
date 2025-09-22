@@ -30,13 +30,13 @@ const HistorySection: React.FC<{ HistoryData: HistorySectionBlock }> = ({
   }, []);
   return (
     <div
-      className={`relative bg-black text-white pt-10 md:pt-20 pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col items-center gap-[30px] md:gap-[50px]`}
+      className={`relative bg-black text-white pt-10 xl:pt-20 sm:pb-[120px] md:pb-[100px] xl:pb-[180px] px-6 xl:px-12 lg:px-20 flex flex-col items-center gap-[10px] sm:gap-[20px] xl:gap-[50px]`}
     >
       <SectionHeading invert alignCenter heading={HistoryData?.heading} />
 
       <div
         ref={cardRef}
-        className="bg-black md:py-12 px-4 md:px-20 custom-timeline"
+        className="bg-black md:py-12 px-4 md:px-20 custom-timeline w-full"
       >
         <Timeline
           className="hidden md:block"
@@ -44,7 +44,7 @@ const HistorySection: React.FC<{ HistoryData: HistorySectionBlock }> = ({
           items={HistoryData?.cards?.map((item, index) => ({
             dot: <div className="w-8 h-8 bg-primary rounded-full"></div>,
             children: (
-              <div className="relative bg-[#2D2D2D] p-4 rounded-[12px] text-start gap-2">
+              <div className="relative bg-[#2D2D2D] p-4 rounded-[12px] text-start gap-2 font-sans">
                 <div
                   className={`absolute top-5 transform -translate-y-1/2 w-0 h-0 
         border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent 
@@ -60,7 +60,9 @@ const HistorySection: React.FC<{ HistoryData: HistorySectionBlock }> = ({
                   <h4 className="text-white text-md font-semibold">
                     {item.title}
                   </h4>
-                  <p className="text-gray-300 text-sm">{item.description}</p>
+                  <p className="text-gray-300 text-xs xl:text-sm">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             ),
@@ -70,7 +72,7 @@ const HistorySection: React.FC<{ HistoryData: HistorySectionBlock }> = ({
         <div className="md:hidden flex flex-col">
           {HistoryData?.cards?.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
-              <div className="relative bg-[#2D2D2D] p-4 rounded-[12px] text-start gap-2">
+              <div className="w-[343px] relative bg-[#2D2D2D] p-4 rounded-[12px] text-start gap-2">
                 <h3 className="text-white text-lg font-bold">{item.year}</h3>
                 <div>
                   <h4 className="text-white text-md font-semibold">

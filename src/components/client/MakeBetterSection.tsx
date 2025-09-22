@@ -30,7 +30,7 @@ const MakeBetterSection: React.FC<{
   }, []);
   return (
     <section
-      className={`relative bg-black text-white pt-20 pb-[180px]
+      className={`relative bg-black text-white pt-20 pb-[100px] sm:pb-[120px] lg:pb-[180px]
       px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
     >
       <div ref={cardRef} className="grid lg:grid-cols-2 items-center gap-12">
@@ -40,6 +40,7 @@ const MakeBetterSection: React.FC<{
             alt={BetterData.image.name}
             width={500}
             height={800}
+            className="w-full lg:w-[500px]"
           />
         </div>
 

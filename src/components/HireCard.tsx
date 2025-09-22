@@ -17,10 +17,10 @@ const HireCard: React.FC<{
     >
       {/* <GetInTouchModal open={open} onClose={() => setOpen(false)} /> */}
       <div className="flex flex-col text-center gap-[11px]">
-        <h3 className="text-[32px] lg:text-[56px] font-bold leading-[120%]">
+        <h3 className="text-[32px] sm:text-3xl xl:text-[56px] font-bold leading-[120%]">
           {data.title}
         </h3>
-        <p className="lg:text-[20px]">{data?.description}</p>
+        <p className="sm:text-[16px] xl:text-xl">{data?.description}</p>
       </div>
       {data?.Button?.text &&
         (data.Button.href ? (

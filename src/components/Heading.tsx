@@ -20,7 +20,7 @@ const Heading: React.FC<HeadingProp> = ({ headingData, alingCenter }) => {
         <div className="flex items-center justify-center gap-1">
           <StarIcon />
 
-          <div className="text-primary text-center font-semibold text-[18px]">
+          <div className="text-primary text-center font-semibold text-[18px] sm:text-xl">
             {headingData?.title}
           </div>
 
@@ -30,7 +30,7 @@ const Heading: React.FC<HeadingProp> = ({ headingData, alingCenter }) => {
         </div>
 
         <h1
-          className={`font-bold md:text-[60px] text-[25px] leading-8 md:leading-[120%] ${
+          className={`font-bold sm:text-3xl md:text-[60px] text-[25px] leading-8 md:leading-[120%] ${
             alingCenter ? "text-center" : ""
           } text-white`}
         >

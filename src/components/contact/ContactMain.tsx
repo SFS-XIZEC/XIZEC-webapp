@@ -35,7 +35,7 @@ const ContactMain: React.FC<{
         },
       },
       {
-        breakpoint: 700,
+        breakpoint: 668,
         settings: {
           slidesToShow: 1,
           centerPadding: "0px",
@@ -44,9 +44,9 @@ const ContactMain: React.FC<{
     ],
   };
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full px-6 md:px-12 lg:px-20">
-      <div className="lg:w-[70%] p-4 lg:p-8 rounded-3xl bg-[#F4F2EA] shadow-md">
-        <p className="text-[32px] lg:text-[56px] font-[500] mb-3 leading-[120%]">
+    <div className="flex flex-col xl:flex-row gap-6 w-full px-6 md:px-12 xl:px-20">
+      <div className="xl:w-[70%] p-4 xl:p-8 rounded-3xl bg-[#F4F2EA] shadow-md">
+        <p className="text-[32px] xl:text-[56px] font-[500] mb-3 leading-[120%]">
           {ContactData?.title}
         </p>
         <p className="text-black mb-6">{ContactData?.description}</p>
@@ -64,7 +64,7 @@ const ContactMain: React.FC<{
           >
             <RightOutlined />
           </button>
-          <Carousel ref={carouselRef} {...settings} className="lg:!px-10">
+          <Carousel ref={carouselRef} {...settings} className="xl:!px-10">
             {Testimonial?.map((testimonial, index: number) => (
               <div key={index} className="flex justify-center">
                 <div className="bg-[#F4F2EA] mx-2 lg:mx-3 p-2 lg:p-5 rounded-[15px] flex flex-col justify-between gap-4 min-h-[420px] max-w-[350px] shadow">
@@ -108,7 +108,7 @@ const ContactMain: React.FC<{
         </div>
       </div>
 
-      <div className="lg:w-[30%] p-4 rounded-3xl shadow-[0px_4px_26.8px_0px_#0000001A] font-sans">
+      <div className="xl:w-[30%] p-4 rounded-3xl shadow-[0px_4px_26.8px_0px_#0000001A] font-sans">
         <FormComponent textColor="text-black" isContact />
       </div>
     </div>

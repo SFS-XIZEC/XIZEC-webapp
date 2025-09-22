@@ -19,7 +19,7 @@ const AboutSection: React.FC<{ AboutData: AboutComponent }> = ({
             alt={AboutData?.image.name}
             width={617}
             height={600}
-            className=""
+            className="w-full lg:w-[617px]"
           />
         </div>
 
@@ -51,11 +51,11 @@ const AboutSection: React.FC<{ AboutData: AboutComponent }> = ({
         {AboutData?.statistics.map((stat, index) => (
           <div key={index} className="">
             <div className="flex items-center justify-between h-40">
-              <div className="flex flex-col justify-center md:justify-start h-full p-2 lg:px-10 lg:py-3">
-                <div className="text-black text-center text-[40px] sm:text-[54px] md:text-[64px] font-semibold leading-12 md:leading-14">
+              <div className="w-full flex flex-col justify-center xl:justify-start h-full p-2 lg:px-10 lg:py-3">
+                <div className="text-black text-center text-[40px] sm:text-[50px] xl:text-[64px] font-sans font-semibold leading-12 md:leading-14">
                   {stat.value}+
                 </div>
-                <div className="text-[#5C5C5C] text-center text-[12px] sm:text-[14px] md:text-[18px]">
+                <div className="text-[#5C5C5C] text-center text-[14px] sm:text-[11px] xl:text-[16px] font-sans">
                   {stat.data}
                 </div>
               </div>

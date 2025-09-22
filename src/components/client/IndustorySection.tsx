@@ -9,7 +9,7 @@ const IndustorySection: React.FC<{ IndustryData: IndustoryComponentBlock }> = ({
   return (
     <div className="bg-white flex flex-col gap-6 sm:gap-10 md:gap-16 px-6 md:px-12 lg:px-20 mt-[80px]">
       <SectionHeading heading={IndustryData?.heading} alignCenter />
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
         {IndustryData?.cards?.map((item, index) => (
           <div
             key={index}

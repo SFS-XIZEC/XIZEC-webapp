@@ -28,7 +28,7 @@ const ContactCollaborator: React.FC<{ CollaboraterData: ClientComponent }> = ({
         },
       },
       {
-        breakpoint: 700,
+        breakpoint: 668,
         settings: {
           slidesToShow: 1,
           centerPadding: "0px",
@@ -57,7 +57,7 @@ const ContactCollaborator: React.FC<{ CollaboraterData: ClientComponent }> = ({
         },
       },
       {
-        breakpoint: 700,
+        breakpoint: 668,
         settings: {
           slidesToShow: 1,
           centerPadding: "0px",

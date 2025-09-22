@@ -10,7 +10,7 @@ const WhyChooseSection: React.FC<{ WhyChooseData: WhyChooseComponent }> = ({
     <div className="flex flex-col gap-6 sm:gap-10 md:gap-16 px-6 md:px-12 lg:px-20">
       <SectionHeading alignCenter heading={WhyChooseData?.heading} />
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {WhyChooseData?.cards?.map((item, index) => (
           <WhyChooseCard data={item} key={index} />
         ))}

@@ -55,7 +55,7 @@ const MapContactSection: React.FC<{
                     target={type === "location" ? "_blank" : undefined}
                     className="flex gap-1 group lg:gap-2 items-center  transition-colors !text-black hover:!text-primary"
                   >
-                    <div className="bg-primary rounded-[4px] w-8 h-8 flex items-center justify-center">
+                    <div className="min-w-8 bg-primary rounded-[4px] h-8 flex items-center justify-center">
                       <MaskedIcon
                         src={image?.url ?? "#"}
                         size={24}

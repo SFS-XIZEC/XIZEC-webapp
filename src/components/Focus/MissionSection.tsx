@@ -31,7 +31,7 @@ const MissionSection: React.FC<{
   }, []);
   return (
     <section
-      className={`relative bg-black/95 ${marginTop} mb-[100px] text-white pt-20 pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
+      className={`relative bg-black/95 ${marginTop} mb-[100px] text-white pt-20 pb-[100px] sm:pb-[120px] lg:pb-[180px] px-6 md:px-12 lg:px-20 flex flex-col gap-[50px]`}
     >
       <div
         ref={cardRef}
@@ -45,6 +45,7 @@ const MissionSection: React.FC<{
               alt={MissionData.image1.name}
               width={500}
               height={560}
+              className="w-full lg:w-[500px]"
             />
           </div>
         </div>
@@ -54,6 +55,7 @@ const MissionSection: React.FC<{
             alt={MissionData.image2.name}
             width={500}
             height={800}
+            className="w-full lg:w-[500px]"
           />
         </div>
       </div>

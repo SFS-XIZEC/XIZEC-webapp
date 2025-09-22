@@ -42,7 +42,7 @@ const CommonButton: React.FC<CommonButtonProp> = ({
       disabled={loading || disable}
       className={`${
         loading && "opacity-50"
-      } font-sans rounded-full h-[48px] min-w-[171px] p-[10px] gap-[10px] transform transition-all duration-300 flex items-center justify-center text-black cursor-pointer ${className}`}
+      } font-sans rounded-full h-[38px] lg:h-[48px] min-w-[120px] lg:min-w-[171px] p-[8px] lg:p-[10px] gap-[10px] transform transition-all duration-300 flex items-center justify-center text-black cursor-pointer ${className}`}
     >
       {loading && <LoadingOutlined spin />}
       {text !== "false" && (

@@ -72,7 +72,7 @@ export default function Header({ data }: { data: GlobalApi }) {
                 src={headerData?.MainLogo?.image?.url}
                 width={172}
                 height={48}
-                className="object-cover"
+                className="object-cover w-[140px] h-[38px] lg:w-[172px] lg:h-[48px]"
                 alt={headerData?.MainLogo?.image?.name}
               />
             </Link>
@@ -128,6 +128,7 @@ export default function Header({ data }: { data: GlobalApi }) {
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
           pathname={pathname}
+          DrawerMainLogo={headerData?.DrawerMainLogo}
           navLinks={headerData?.NavLink}
         />
 

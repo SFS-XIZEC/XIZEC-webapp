@@ -1,15 +1,16 @@
-import { MainLogo } from "@/common/icons";
-import { NavLink } from "@/types";
+import { Media, NavLink } from "@/types";
 import { CloseOutlined } from "@ant-design/icons";
 import { Drawer } from "antd";
 import Link from "next/link";
 import React from "react";
+import { StrapiImage } from "./StrapiImage";
 
 interface MenuDrawerProp {
   open: boolean;
   onClose: () => void;
   pathname: string;
   navLinks: NavLink[];
+  DrawerMainLogo: Media;
 }
 
 const MenuDrawer: React.FC<MenuDrawerProp> = ({
@@ -17,6 +18,7 @@ const MenuDrawer: React.FC<MenuDrawerProp> = ({
   onClose,
   pathname,
   navLinks,
+  DrawerMainLogo,
 }) => {
   return (
     <Drawer
@@ -27,7 +29,13 @@ const MenuDrawer: React.FC<MenuDrawerProp> = ({
       title={
         <div className="flex justify-between items-center">
           <Link href="/dashboard" className="flex-shrink-0" onClick={onClose}>
-            <MainLogo />
+            <StrapiImage
+              src={DrawerMainLogo?.url}
+              width={172}
+              height={48}
+              className="object-cover w-[140px] h-full lg:w-[172px] lg:h-[48px]"
+              alt={DrawerMainLogo?.name}
+            />
           </Link>
           <div onClick={onClose} className="cursor-pointer">
             <CloseOutlined className="!text-red-500" />

@@ -61,6 +61,7 @@ export interface Header {
   };
   NavLink: NavLink[];
   Button: HeaderButton;
+  DrawerMainLogo: Media;
 }
 
 // ========================
