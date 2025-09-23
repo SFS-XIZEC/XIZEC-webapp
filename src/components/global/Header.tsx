@@ -54,7 +54,7 @@ export default function Header({ data }: { data: GlobalApi }) {
   return (
     <>
       <div className="fixed w-full top-0 flex flex-col justify-between items-center z-50">
-        <Banner banner={data?.Banner} />
+        {fade > 0.9 && <Banner banner={data?.Banner} />}
         <header
           className={`w-full flex justify-between px-2 py-3 items-center lg:px-8 transition-colors duration-300 z-50 ${
             fade < 1 ? "bg-black/40 backdrop-blur-sm" : "bg-transparent"
